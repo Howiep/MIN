@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M_Core", "M_Core\M_Core.csproj", "{2AAAE04E-10A6-48CF-98C8-1FCA8DCB8367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M_API", "M_API\M_API.csproj", "{9FB72DED-ABD2-4794-993E-D2BD79B80C10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M_Data", "M_Data\M_Data.csproj", "{B009D83E-4E3D-46D3-B33B-D4DAFA965C6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AAAE04E-10A6-48CF-98C8-1FCA8DCB8367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AAAE04E-10A6-48CF-98C8-1FCA8DCB8367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AAAE04E-10A6-48CF-98C8-1FCA8DCB8367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AAAE04E-10A6-48CF-98C8-1FCA8DCB8367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB72DED-ABD2-4794-993E-D2BD79B80C10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB72DED-ABD2-4794-993E-D2BD79B80C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB72DED-ABD2-4794-993E-D2BD79B80C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB72DED-ABD2-4794-993E-D2BD79B80C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B009D83E-4E3D-46D3-B33B-D4DAFA965C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B009D83E-4E3D-46D3-B33B-D4DAFA965C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B009D83E-4E3D-46D3-B33B-D4DAFA965C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B009D83E-4E3D-46D3-B33B-D4DAFA965C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
