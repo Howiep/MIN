@@ -19,4 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\M_Core\M_Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="appsettingsDev.json" />
+  </ItemGroup>
 </Project>
