@@ -1,23 +1,23 @@
 <template>
 <div id="app">
    <v-app>
-    <page-header />
       <main>
         <v-container fluid>
           <router-view></router-view>
         </v-container>
       </main>
+      <page-Nav />
   </v-app>
 </div>
  
 </template>
 <script>
-import PageHeader from '@/components/Header.vue'
+import PageNav from '@/components/Nav.vue'
 
 export default {
   name: 'app',
   components: {
-    PageHeader
+    PageNav
   }
 }
 </script>
