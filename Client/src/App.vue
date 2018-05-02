@@ -7,8 +7,8 @@
           <router-view></router-view>
         </v-container>
          <!-- Todo: add if(loggedin), so nav is hidden on first load -->
-        <page-bottom-nav />
       </main>
+      <page-bottom-nav />
   </v-app>
 </div>
  

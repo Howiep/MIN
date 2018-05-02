@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'landing',
+  name: 'landingPage',
   data () {
     return {
       msg: 'My Internship Notation'
