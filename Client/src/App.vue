@@ -5,14 +5,14 @@
         <v-container fluid>
           <router-view></router-view>
         </v-container>
+        <page-Nav />
       </main>
-      <page-Nav />
   </v-app>
 </div>
  
 </template>
 <script>
-import PageNav from '@/components/Nav.vue'
+import PageNav from '@/components/shared/Nav.vue'
 
 export default {
   name: 'app',
@@ -33,8 +33,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-main{
+/* main{
   padding-top: 100px;
-}
+} */
 
 </style>

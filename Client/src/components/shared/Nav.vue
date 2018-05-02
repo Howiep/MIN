@@ -1,16 +1,24 @@
 <template>
-     <v-bottom-nav absolute :value="true" :active.sync="e1" color="transparent">
-      <v-btn flat color="teal" value="recent">
+     <v-bottom-nav absolute shift :value="true" :active.sync="e1" color="transparent">
+      <v-btn flat color="primary" value="recent" >
         <span>Recent</span>
-        <v-icon>history</v-icon>
+        <v-icon>trending_up</v-icon>
       </v-btn>
-      <v-btn flat color="teal" value="favorites">
-        <span>Favorites</span>
-        <v-icon>favorite</v-icon>
+      <v-btn flat color="primary" value="list">
+        <span>List</span>
+        <v-icon>list</v-icon>
       </v-btn>
-      <v-btn flat color="teal" value="nearby">
-        <span>Nearby</span>
-        <v-icon>place</v-icon>
+      <v-btn flat color="primary" value="add">
+        <span>Add</span>
+        <v-icon>add_circle_outline</v-icon>
+      </v-btn>
+      <v-btn flat color="primary" value="aktivitet">
+        <span>Aktivitet</span>
+        <v-icon>notifications_none</v-icon>
+      </v-btn>
+      <v-btn flat color="primary" value="nearby">
+        <span>Social</span>
+        <v-icon>person_outline</v-icon>
       </v-btn>
     </v-bottom-nav>
     <!-- <v-toolbar-items>
@@ -49,6 +57,8 @@ export default {
 
 <!-- Add "scoped" attribute to 
 limit CSS to this component only -->
-<style>
-
+<style scroped>
+v-bottom-nav{
+  max-width: 100vw;
+}
 </style>

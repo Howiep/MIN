@@ -25,7 +25,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import Panel from '@/components/Panel'
+import Panel from '@/components/shared/Panel'
 
 export default {
   name: 'register',
