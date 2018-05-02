@@ -1,23 +1,27 @@
 <template>
 <div id="app">
    <v-app>
+     <page-top-nav />
       <main>
         <v-container fluid>
           <router-view></router-view>
         </v-container>
-        <page-Nav />
+         <!-- Todo: add if(loggedin), so nav is hidden on first load -->
+        <page-bottom-nav />
       </main>
   </v-app>
 </div>
  
 </template>
 <script>
-import PageNav from '@/components/shared/Nav.vue'
+import PageBottomNav from '@/components/shared/BottomNav.vue'
+import PageTopNav from '@/components/shared/TopNav.vue'
 
 export default {
   name: 'app',
   components: {
-    PageNav
+    PageBottomNav,
+    PageTopNav
   }
 }
 </script>

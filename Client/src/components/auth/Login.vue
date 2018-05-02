@@ -1,6 +1,6 @@
 <template>
  <v-layout>
-   <v-flex xs6 offset-xs3>
+   <v-flex>
      <panel title="Login">
        <br>
          <form name="tab-tracker-form" autocomplete="off">
@@ -10,7 +10,7 @@
           <br>
           <br>
           <div v-if="!this.loading">
-            <v-btn class="cyan" dark @click="login" >Login</v-btn>
+            <v-btn class="primary" dark @click="login" >Login</v-btn>
           </div>
           <div v-if="this.loading" >
             <br>
