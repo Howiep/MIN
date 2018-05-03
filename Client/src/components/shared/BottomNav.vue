@@ -1,15 +1,15 @@
 <template>
-     <v-bottom-nav absolute shift :value="true" :active.sync="e1" color="transparent">
-      <v-btn flat color="primary" value="recent" >
-        <span>Recent</span>
+     <v-bottom-nav app absolute shift :value="true" :active.sync="e1" color="transparent">
+      <v-btn dark flat color="primary" value="recent" to="home" >
+        <span>Seneste</span>
         <v-icon>trending_up</v-icon>
       </v-btn>
-      <v-btn flat color="primary" value="list">
-        <span>List</span>
+      <v-btn flat color="primary" value="list" to="experience">
+        <span>Erfaringer</span>
         <v-icon>list</v-icon>
       </v-btn>
-      <v-btn flat color="primary" value="add">
-        <span>Add</span>
+      <v-btn flat color="primary" value="add" to="experience-add">
+        <span>Tilføj</span>
         <v-icon>add_circle_outline</v-icon>
       </v-btn>
       <v-btn flat color="primary" value="aktivitet">

@@ -1,14 +1,14 @@
 <template>
 <div id="app">
    <v-app>
-     <page-top-nav />
-      <main>
+     <!-- <page-top-nav /> -->
+      <v-content>
         <v-container fluid>
           <router-view></router-view>
         </v-container>
          <!-- Todo: add if(loggedin), so nav is hidden on first load -->
-      </main>
-      <page-bottom-nav />
+      </v-content>
+      <page-bottom-nav app/>
   </v-app>
 </div>
  
@@ -37,8 +37,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-/* main{
-  padding-top: 100px;
-} */
 
 </style>
