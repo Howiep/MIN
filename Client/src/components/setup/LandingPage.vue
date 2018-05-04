@@ -6,8 +6,11 @@
     <h3>{{ msg }}</h3>
     </v-card-title>
     <v-card-actions>
-    <v-btn class="primary" dark to="register" >Register</v-btn>
-    <v-btn class="primary" dark to="login" >Login</v-btn>
+     <v-btn class="primary" dark to="register" >Register</v-btn>
+    </v-card-actions>
+    <v-card-text>Har du en konto?</v-card-text>
+    <v-card-actions>
+    <v-btn class="primary" dark to="intro" >Login</v-btn>
     </v-card-actions>
   </v-card>
 </template>

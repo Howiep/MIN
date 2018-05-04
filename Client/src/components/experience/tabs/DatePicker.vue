@@ -1,23 +1,17 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Homepage</h2>
-    <add-dialog></add-dialog>
+    <h3>{{ msg }}</h3>
+      <v-btn color="primary" dark @click.stop="dialog = true">Open Dialog 1</v-btn>
   </div>
 </template>
 
 <script>
-import AddDialog from '@/components/experience/AddExperience'
-
 export default {
-  name: 'home',
+  name: 'DatePicker',
   data () {
     return {
-      msg: 'Home'
+      msg: 'Vælg dato'
     }
-  },
-  components: {
-    AddDialog
   }
 }
 </script>

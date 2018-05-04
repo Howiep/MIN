@@ -1,25 +1,11 @@
 <template>
-     <v-bottom-nav absolute shift :value="true" :active.sync="e1" color="transparent">
-      <v-btn flat color="primary" value="recent" >
-        <span>Recent</span>
-        <v-icon>trending_up</v-icon>
-      </v-btn>
-      <v-btn flat color="primary" value="list">
-        <span>List</span>
-        <v-icon>list</v-icon>
-      </v-btn>
-      <v-btn flat color="primary" value="add">
-        <span>Add</span>
-        <v-icon>add_circle_outline</v-icon>
-      </v-btn>
-      <v-btn flat color="primary" value="aktivitet">
-        <span>Aktivitet</span>
-        <v-icon>notifications_none</v-icon>
-      </v-btn>
-      <v-btn flat color="primary" value="nearby">
-        <span>Social</span>
-        <v-icon>person_outline</v-icon>
-      </v-btn>
+     <v-bottom-nav app absolute shift :value="true" :active.sync="e1" color="primary">
+       <div v-for="item in menuItems" :key="item.order">
+        <v-btn flat dark :value="item.value" :to="item.path" >
+          <span>{{ item.text }}</span>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-btn>
+       </div>
     </v-bottom-nav>
     <!-- <v-toolbar-items>
         <v-btn flat href="/#/">home</v-btn>
@@ -35,7 +21,13 @@
 export default {
   data () {
     return {
-      e1: null
+      e1: null,
+      menuItems: [
+        { order: 1, value: 'home', text: 'Hjem', path: 'home', icon: 'home' },
+        { order: 2, value: 'experiences', text: 'Erfaringer', path: 'experiences', icon: 'list' },
+        { order: 3, value: 'feed', text: 'Feed', path: 'feed', icon: 'notifications_none' },
+        { order: 4, value: 'user', text: 'Bruger', path: 'user', icon: 'person_outline' }
+      ]
     }
     // methods: {
     //   logout () {

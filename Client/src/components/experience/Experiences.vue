@@ -10,10 +10,10 @@
 import AddDialog from '@/components/experience/AddExperience'
 
 export default {
-  name: 'home',
+  name: 'experiences',
   data () {
     return {
-      msg: 'Home'
+      msg: 'Experiences'
     }
   },
   components: {
