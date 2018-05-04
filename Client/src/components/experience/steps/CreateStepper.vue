@@ -23,12 +23,12 @@
           <v-tabs-items v-model="model">
             <v-tab-item :id="`tab-${1}`">
               <v-card flat>
-                <v-date-picker v-model="picker" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                <v-date-picker no-title v-model="datePicker"></v-date-picker>
               </v-card>
             </v-tab-item>
             <v-tab-item :id="`tab-${2}`">
               <v-card flat>
-                <v-time-picker v-model="picker" :landscape="landscape"></v-time-picker>
+                <v-time-picker no-title width="250" v-model="timePicker"></v-time-picker>
               </v-card>
             </v-tab-item>
           </v-tabs-items>
@@ -56,9 +56,8 @@ export default {
   data () {
     return {
       e1: 0,
-      picker: null,
-      landscape: false,
-      reactive: false,
+      datePicker: null,
+      timePicker: null,
       model: 'tab-1',
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
