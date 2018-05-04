@@ -1,7 +1,7 @@
 <template>
     <v-toolbar absolute app dark class="primary">
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-    <v-toolbar-title>M.I.N</v-toolbar-title>
+    <v-btn flat to="home">LOGO</v-btn>
     <v-toolbar-title>{{ currentPage }}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items  v-for="item in menuItems" :key="item.order" class="hidden-sm-and-down">

@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <h3>{{ msg }}</h3>
-      <v-btn color="primary" dark @click.stop="dialog = true">Open Dialog 1</v-btn>
   </div>
 </template>
 
