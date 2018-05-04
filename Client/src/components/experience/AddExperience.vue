@@ -14,7 +14,7 @@
                 <v-btn dark flat @click.native="dialog = false">Save</v-btn>
               </v-toolbar-items>
             </v-toolbar>
-              <create-stepper v-on:closeMenu="updateParent"></create-stepper>
+              <create-stepper v-on:closeMenu="closeDialog"></create-stepper>
             <div style="flex: 1 1 auto;"></div>
           </v-card>
         </v-dialog>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import DatePicker from '@/components/experience/steps/tabs/DatePicker'
 import CreateStepper from '@/components/experience/steps/CreateStepper'
 
 export default {
@@ -32,17 +31,15 @@ export default {
     return {
       msg: 'Ny Erfaring',
       dialog: true,
-      e6: 1,
-      Date: ''
+      e6: 1
     }
   },
   components: {
-    DatePicker,
     CreateStepper
   },
   methods: {
-    updateParent (parentVariable) {
-      this.dialog = parentVariable
+    closeDialog (dialogStatus) {
+      this.dialog = dialogStatus
     }
   }
 }

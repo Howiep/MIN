@@ -39,10 +39,10 @@ export default {
     }
   },
   methods: {
-    updateMenu () {
+    async updateMenu () {
       try {
-        this.menuItems = MenuService.get()
-        this.currentPage = MenuService.getText(this.$route.path)
+        this.menuItems = await MenuService.get()
+        this.currentPage = await MenuService.getText(this.$route.path)
       } catch (error) {
         // todo: proper errorhandling
         this.message = 'error'

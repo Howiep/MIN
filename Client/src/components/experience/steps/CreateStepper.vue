@@ -10,29 +10,27 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <div>
-            <v-tabs centered color="transparent" slot="extension" slider-color="yellow" v-model="model" >
-              <v-tab :href="`#tab-${1}`">
-                <v-icon color="darkGrey">date_range</v-icon>
-                Dato
-              </v-tab>
-              <v-tab :href="`#tab-${2}`">
-                <v-icon color="darkGrey">date_range</v-icon>
-                Tid
-              </v-tab>
-            </v-tabs>
-          <v-tabs-items v-model="model">
-            <v-tab-item :id="`tab-${1}`">
-              <v-card flat>
-                <v-date-picker no-title v-model="datePicker"></v-date-picker>
-              </v-card>
-            </v-tab-item>
-            <v-tab-item :id="`tab-${2}`">
-              <v-card flat>
-                <v-time-picker no-title width="250" v-model="timePicker"></v-time-picker>
-              </v-card>
-            </v-tab-item>
-          </v-tabs-items>
+            <v-dialog ref="dateDialog" v-model="modal" :return-value.sync="date" persistent lazy full-width width="290px">
+              <v-text-field slot="activator" v-model="date" label="Vælg Dato" prepend-icon="event" readonly></v-text-field>
+              <v-date-picker v-model="date" scrollable>
+                <v-spacer></v-spacer>
+                <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                <v-btn flat color="primary" @click="$refs.dateDialog.save(date)">OK</v-btn>
+              </v-date-picker>
+            </v-dialog>
         </div>
+        <div>
+           <v-dialog ref="timeDialog" persistent v-model="modal2" lazy full-width width="290px" :return-value.sync="time">
+            <v-text-field slot="activator" label="Vælg Tid" v-model="time" prepend-icon="access_time" readonly
+            ></v-text-field>
+            <v-time-picker v-model="time" actions>
+              <v-spacer></v-spacer>
+              <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
+              <v-btn flat color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
+            </v-time-picker>
+          </v-dialog>
+        </div>
+        <p v-if="dateTime">Du har valgt: {{ dateTime }}</p>
         <v-btn color="primary" @click.native="e1 = 2">Fortsæt</v-btn>
         <v-btn flat @click="closeMenu()">Annuller</v-btn>
       </v-stepper-content>
@@ -51,21 +49,39 @@
 </template>
 
 <script>
+
 export default {
   name: 'createStepper',
   data () {
     return {
       e1: 0,
-      datePicker: null,
-      timePicker: null,
-      model: 'tab-1',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      date: null,
+      time: null,
+      dateTime: '',
+      modal: false,
+      modal2: false
+    }
+  },
+  watch: {
+    time () {
+      this.chooseTime()
     }
   },
   methods: {
     closeMenu () {
       this.$emit('closeMenu', this.dialog)
+    },
+    chooseTime () {
+      this.formatDate(this.date)
+      this.dateTime = this.date + ' ' + this.time
+      this.formatDate(this.dateTime)
+      console.log(this.dateTime)
+    },
+    formatDate (str) {
+      return str.split('-').reverse().join('-')
     }
+  },
+  components: {
   }
 }
 </script>
