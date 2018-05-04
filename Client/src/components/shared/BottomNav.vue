@@ -1,8 +1,8 @@
 <template>
-     <v-bottom-nav app absolute shift :value="true" :active.sync="e1" color="primary">
+     <v-bottom-nav app absolute :value="true" :active.sync="e1" color="primary">
        <div v-for="item in menuItems" :key="item.order">
         <v-btn flat dark :value="item.value" :to="item.path" >
-          <span>{{ item.text }}</span>
+          <!-- <span>{{ item.text }}</span> -->
           <v-icon>{{ item.icon }}</v-icon>
         </v-btn>
        </div>
@@ -16,33 +16,22 @@
 </template>
 
 <script>
-// import store from '@/store/store'
+import MenuService from '@/services/MenuService'
 
 export default {
   data () {
     return {
       e1: null,
-      menuItems: [
-        { order: 1, value: 'home', text: 'Hjem', path: 'home', icon: 'home' },
-        { order: 2, value: 'experiences', text: 'Erfaringer', path: 'experiences', icon: 'list' },
-        { order: 3, value: 'feed', text: 'Feed', path: 'feed', icon: 'notifications_none' },
-        { order: 4, value: 'user', text: 'Bruger', path: 'user', icon: 'person_outline' }
-      ]
+      menuItems: []
     }
-    // methods: {
-    //   logout () {
-    //     this.$store.dispatch('setToken', null)
-    //     this.$store.dispatch('setUser', null)
-    //     this.$router.push({
-    //       name: global
-    //     })
-    //   }
-    // },
-    // computed: {
-    //   isLoggedIn () {
-    //     return store.state.isLoggedIn
-    //   }
-    // }
+  },
+  async mounted () {
+    try {
+      const res = await MenuService.get()
+      this.menuItems = res
+    } catch (error) {
+      this.message = error.response.data.error
+    }
   }
 }
 </script>

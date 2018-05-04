@@ -1,8 +1,12 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Homepage</h2>
-  </div>
+    <v-layout>
+    <v-flex>
+      <div class="hello">
+          <h1>{{ msg }}</h1>
+          <h2>Homepage</h2>
+      </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

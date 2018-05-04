@@ -11,7 +11,7 @@
       <page-bottom-nav app/>
   </v-app>
 </div>
- 
+
 </template>
 <script>
 import PageBottomNav from '@/components/shared/BottomNav.vue'
