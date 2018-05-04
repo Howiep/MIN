@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <v-layout row justify-center>
-        <v-btn fab color="primary" dark @click.stop="dialog = true"><v-icon dark>add</v-icon></v-btn>
+        <v-btn class="addButton" absolute right fab color="primary" dark @click.stop="dialog = true"><v-icon dark>add</v-icon></v-btn>
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
           <v-card tile>
             <v-toolbar card dark color="primary">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import DatePicker from '@/components/experience/DatePicker'
+import DatePicker from '@/components/experience/tabs/DatePicker'
 
 export default {
   name: 'addExperience',
@@ -45,6 +45,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+<style scoped>
+.addButton{
+  bottom: 75px;
+}
 </style>
