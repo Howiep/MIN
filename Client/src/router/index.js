@@ -5,9 +5,9 @@ import Register from '@/components/setup/Register'
 import Login from '@/components/auth/Login'
 import LandingPage from '@/components/setup/LandingPage'
 import IntroPage from '@/components/setup/Intro'
-
-import ExperiencePage from '@/components/experience/experience'
-import ExperienceAddPage from '@/components/experience/experience-add/experienceAdd'
+import ExperiencesPage from '@/components/experience/Experiences'
+import FeedPage from '@/components/feed/Feed'
+import UserPage from '@/components/user/User'
 
 Vue.use(Router)
 
@@ -51,14 +51,23 @@ export default new Router({
 
     // Experience
     {
-      path: '/experience',
-      name: 'experience',
-      component: ExperiencePage
+      path: '/experiences',
+      name: 'experiences',
+      component: ExperiencesPage
     },
+
+    // Feed
     {
-      path: '/experience-add',
-      name: 'experience-add',
-      component: ExperienceAddPage
+      path: '/feed',
+      name: 'feed',
+      component: FeedPage
+    },
+
+    // User
+    {
+      path: '/user',
+      name: 'user',
+      component: UserPage
     }
   ]
 })

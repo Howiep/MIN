@@ -1,21 +1,14 @@
 <template>
-    <v-toolbar app dark>
+    <v-toolbar app dark class="primary">
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-    <v-toolbar-title>title</v-toolbar-title>
+    <v-toolbar-title>M.I.N</v-toolbar-title>
+    <v-toolbar-title>{{  }}</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-toolbar-items>
-      <v-text-field
-        label="Search"
-        v-model="search"
-      ></v-text-field>
-      <v-btn flat icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-    </v-toolbar-items>
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat>Link One</v-btn>
-      <v-btn flat>Link Two</v-btn>
-      <v-btn flat>Link Three</v-btn>
+    <v-toolbar-items  v-for="item in menuItems" :key="item.order" class="hidden-sm-and-down">
+        <v-btn flat dark :value="item.value" :to="item.path" >
+          <v-icon>{{ item.icon }}</v-icon>
+          <span>{{ item.text }}</span>
+        </v-btn>
     </v-toolbar-items>
   </v-toolbar>
     <!-- <v-toolbar-items>
@@ -33,7 +26,12 @@ export default {
   data () {
     return {
       e1: null,
-      search: ''
+      menuItems: [
+        { order: 1, value: 'home', text: 'Hjem', path: 'home', icon: 'home' },
+        { order: 2, value: 'experiences', text: 'Erfaringer', path: 'experiences', icon: 'list' },
+        { order: 3, value: 'feed', text: 'Feed', path: 'feed', icon: 'notifications_none' },
+        { order: 4, value: 'user', text: 'Bruger', path: 'user', icon: 'person_outline' }
+      ]
     }
   }
   // methods: {

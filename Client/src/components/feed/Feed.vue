@@ -10,7 +10,7 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Home'
+      msg: 'Feed'
     }
   }
 }

@@ -2,16 +2,22 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Homepage</h2>
+    <add-dialog></add-dialog>
   </div>
 </template>
 
 <script>
+import AddDialog from '@/components/experience/AddExperience'
+
 export default {
-  name: 'home',
+  name: 'experiences',
   data () {
     return {
-      msg: 'Home'
+      msg: 'Experiences'
     }
+  },
+  components: {
+    AddDialog
   }
 }
 </script>

@@ -1,16 +1,16 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Homepage</h2>
+    <h3>{{ msg }}</h3>
+      <v-btn color="primary" dark @click.stop="dialog = true">Open Dialog 1</v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'experienceAdd',
+  name: 'DatePicker',
   data () {
     return {
-      msg: 'List experiences'
+      msg: 'Vælg dato'
     }
   }
 }
