@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       msg: 'Ny Erfaring',
-      dialog: false,
+      dialog: true,
       e6: 1,
       Date: ''
     }
