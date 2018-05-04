@@ -1,7 +1,7 @@
 <template>
 <div id="app">
    <v-app>
-     <page-top-nav app/>
+     <page-top-nav/>
       <v-content>
         <v-container xs-fluid >
           <router-view></router-view>
