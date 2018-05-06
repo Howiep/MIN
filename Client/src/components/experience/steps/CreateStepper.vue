@@ -7,7 +7,7 @@
       <v-divider></v-divider>
       <v-stepper-step step="3">Noter<small>Valgfrit</small></v-stepper-step>
     </v-stepper-header>
-    <v-stepper-items>
+    <v-stepper-items class="stepperCard">
       <v-stepper-content step="1">
         <div>
             <v-dialog ref="dateDialog" v-model="modal" :return-value.sync="date" persistent lazy full-width width="290px">
@@ -19,7 +19,7 @@
               </v-date-picker>
             </v-dialog>
         </div>
-        <div>
+        <div class="mb-5">
            <v-dialog ref="timeDialog" persistent v-model="modal2" lazy full-width width="290px" :return-value.sync="time">
             <v-text-field slot="activator" label="Vælg Tid" v-model="time" prepend-icon="access_time" readonly
             ></v-text-field>
@@ -30,15 +30,19 @@
             </v-time-picker>
           </v-dialog>
         </div>
-        <p v-if="dateTime">Du har valgt: {{ dateTime }}</p>
+        <p v-if="dateFormatted">Du har valgt: {{ dateFormatted }} - {{ time }}</p>
         <v-btn color="primary" @click.native="e1 = 2">Fortsæt</v-btn>
         <v-btn flat @click="closeMenu()">Annuller</v-btn>
       </v-stepper-content>
+
       <v-stepper-content step="2">
-        <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
-        <v-btn color="primary" @click.native="e1 = 3">Fortsæt</v-btn>
+        <div class="mb-5">
+          <choose-experience></choose-experience>
+        </div>
+        <v-btn color="accent" @click.native="e1 = 3">Fortsæt</v-btn>
         <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
+
       <v-stepper-content step="3">
         <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
         <v-btn color="primary" @click="closeMenu()">Færdig</v-btn>
@@ -49,22 +53,28 @@
 </template>
 
 <script>
+import ChooseExperience from '@/components/experience/steps/ChooseExperience'
 
 export default {
   name: 'createStepper',
   data () {
     return {
-      e1: 0,
+      e1: 2,
       date: null,
       time: null,
-      dateTime: '',
+      dateFormatted: null,
       modal: false,
       modal2: false
     }
   },
+  computed: {
+    computedDateFormatted () {
+      return this.formatDate(this.date)
+    }
+  },
   watch: {
     time () {
-      this.chooseTime()
+      this.dateFormatted = this.formatDate(this.date)
     }
   },
   methods: {
@@ -72,21 +82,24 @@ export default {
       this.$emit('closeMenu', this.dialog)
     },
     chooseTime () {
-      this.formatDate(this.date)
-      this.dateTime = this.date + ' ' + this.time
-      this.formatDate(this.dateTime)
-      console.log(this.dateTime)
+      this.dateFormatted = this.date + ' ' + this.time
     },
-    formatDate (str) {
-      return str.split('-').reverse().join('-')
+    formatDate (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
     }
   },
   components: {
+    ChooseExperience
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+<style scoped>
+.stepperCard > div{
+  height: 100%;
+}
 </style>

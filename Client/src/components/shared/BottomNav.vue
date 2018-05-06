@@ -1,7 +1,7 @@
 <template>
-     <v-bottom-nav app absolute :value="true" :active.sync="e1" color="primary">
+     <v-bottom-nav app absolute :value="true" :active.sync="e1" color="transparent">
        <div v-for="item in menuItems" :key="item.order">
-        <v-btn flat dark :value="item.value" :to="item.path" >
+        <v-btn flat color="primary" :value="item.value" :to="item.path" >
           <!-- <span>{{ item.text }}</span> -->
           <v-icon>{{ item.icon }}</v-icon>
         </v-btn>
