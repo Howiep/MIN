@@ -31,7 +31,7 @@
           </v-dialog>
         </div>
         <p v-if="dateFormatted">Du har valgt: {{ dateFormatted }} - {{ time }}</p>
-        <v-btn color="primary" @click.native="e1 = 2">Fortsæt</v-btn>
+        <v-btn color="accent" @click.native="e1 = 2">Fortsæt</v-btn>
         <v-btn flat @click="closeMenu()">Annuller</v-btn>
       </v-stepper-content>
 
@@ -45,7 +45,7 @@
 
       <v-stepper-content step="3">
         <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
-        <v-btn color="primary" @click="closeMenu()">Færdig</v-btn>
+        <v-btn color="accent" @click="closeMenu()">Færdig</v-btn>
         <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
     </v-stepper-items>
@@ -59,7 +59,7 @@ export default {
   name: 'createStepper',
   data () {
     return {
-      e1: 2,
+      e1: 1,
       date: null,
       time: null,
       dateFormatted: null,
