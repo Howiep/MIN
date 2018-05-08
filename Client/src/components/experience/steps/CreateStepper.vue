@@ -37,14 +37,18 @@
 
       <v-stepper-content step="2">
         <div class="mb-5">
-          <choose-experience></choose-experience>
+          <choose-experience v-on:setExperiences="setExperiences"></choose-experience>
         </div>
         <v-btn color="primary" @click.native="e1 = 3">Fortsæt</v-btn>
         <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="3">
-        <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+        <div class="mb-5">
+          <v-text-field multi-line label="Indsæt note" v-model="createNote">
+
+          </v-text-field>
+        </div>
         <v-btn color="primary" @click="closeMenu()">Færdig</v-btn>
         <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
@@ -59,9 +63,11 @@ export default {
   name: 'createStepper',
   data () {
     return {
-      e1: 1,
+      e1: 2,
       date: null,
       time: null,
+      createNote: '',
+      selectedExperiences: [],
       dateFormatted: null,
       modal: false,
       modal2: false
@@ -89,6 +95,9 @@ export default {
 
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
+    },
+    setExperiences (selected) {
+      this.selectedExperiences = selected
     }
   },
   components: {
