@@ -8,7 +8,7 @@
       </v-tab>
     </v-tabs>
   </v-toolbar>
-  <v-tabs-items v-model="currentItem">
+  <v-tabs-items v-model="currentItem" class="actionList">
     <v-tab-item v-for="item in experienceList" :key="item.id" :id="'tab-' + item.id">
       <v-card v-if="!search" class="scroll-y chooseList">
         <v-list-tile ripple @click="toggle(i)" v-for="i in item.actions" :key="i.index" avatar>
