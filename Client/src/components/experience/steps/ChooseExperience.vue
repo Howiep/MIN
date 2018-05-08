@@ -2,7 +2,7 @@
 <div>
   <v-toolbar color="transparent" flat tabs>
     <v-text-field v-model="search" append-icon="search" label="Søg" solo-inverted flat></v-text-field>
-    <v-tabs v-if="!search" fixed-tabs v-model="currentItem" color="transparent" slider-color="yellow" slot="extension">
+    <v-tabs v-if="!search" fixed-tabs v-model="currentItem" color="transparent" slider-color="accent" slot="extension">
       <v-tab v-for="item in experienceList" :key="item.id" :href="'#tab-' + item.id">
         {{ item.name }}
       </v-tab>

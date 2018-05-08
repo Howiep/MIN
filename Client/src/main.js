@@ -12,11 +12,11 @@ Vue.config.productionTip = false
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#7D86F0',
-    accent: '#A576EF',
+    primary: '#b06a92',
+    accent: '#45BA3F',
     darkGrey: '#3C3C3C',
     whiteText: '#ececec',
-    underline: '#F4D63C',
+    underline: '#45BA3F',
     green: '#20D74B'
   }
 })
