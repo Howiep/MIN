@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import ChooseDate from './ChooseDate'
+import ChooseDate from '@/components/experience/steps/ChooseDate'
 import ChooseExperience from '@/components/experience/steps/ChooseExperience'
 
 export default {
