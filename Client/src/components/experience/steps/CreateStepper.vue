@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import ChooseExperience from '@/components/experience/steps/ChooseExperience'
 import ChooseDate from '@/components/experience/steps/ChooseDate'
+import ChooseExperience from '@/components/experience/steps/ChooseExperience'
 
 export default {
   name: 'createStepper',
@@ -62,8 +62,8 @@ export default {
     }
   },
   components: {
-    ChooseExperience,
-    ChooseDate
+    ChooseDate,
+    ChooseExperience
   }
 }
 </script>

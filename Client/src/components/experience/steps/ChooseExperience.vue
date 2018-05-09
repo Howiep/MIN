@@ -77,8 +77,6 @@ export default {
         this.selected.push(value)
       }
       this.$emit('setExperiences', this.selected)
-    },
-    setExperiences () {
     }
   },
   computed: {

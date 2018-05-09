@@ -27,7 +27,7 @@ export default {
   watch: {
     date () {
       this.dateFormatted = this.formatDate(this.date)
-      this.chooseDate()
+      this.$emit('setDate', this.dateFormatted)
     }
   },
   methods: {
@@ -36,9 +36,6 @@ export default {
 
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
-    },
-    chooseDate () {
-      this.$emit('setDate', this.dateFormatted)
     }
   },
   computed: {
