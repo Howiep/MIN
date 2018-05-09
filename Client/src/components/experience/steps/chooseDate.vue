@@ -27,20 +27,24 @@ export default {
   watch: {
     date () {
       this.dateFormatted = this.formatDate(this.date)
-      this.setDate()
+      this.chooseDate()
     }
   },
   methods: {
     formatDate (date) {
       if (!date) return null
+
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
     },
-    setDate () {
+    chooseDate () {
       this.$emit('setDate', this.dateFormatted)
     }
   },
   computed: {
+    computedDateFormatted () {
+      return this.formatDate(this.date)
+    }
   }
 }
 </script>
