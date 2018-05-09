@@ -4,8 +4,8 @@
     <panel title="Register">
          <br>
          <form name="tab-tracker-form" autocomplete="off">
-            <v-text-field name="email" label="Email" v-model="email"></v-text-field>          
-           <v-text-field autocomplete="new-password" type="password" name="password" label="Password" v-model="password"></v-text-field>          
+            <v-text-field name="email" label="Email" v-model="email"></v-text-field>
+           <v-text-field autocomplete="new-password" type="password" name="password" label="Password" v-model="password"></v-text-field>
          </form>
            <br>
           <br>
@@ -61,7 +61,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to 
+<!-- Add "scoped" attribute to
 limit CSS to this component only -->
 <style>
 

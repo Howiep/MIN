@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+import Home from '@/views/Home'
 import Register from '@/components/setup/Register'
 import Login from '@/components/auth/Login'
 import LandingPage from '@/components/setup/LandingPage'
 import IntroPage from '@/components/setup/Intro'
-import ExperiencesPage from '@/components/experience/Experiences'
-import FeedPage from '@/components/feed/Feed'
-import UserPage from '@/components/user/User'
+import ExperiencesPage from '@/views/Experiences'
+import FeedPage from '@/views/Feed'
+import UserPage from '@/views/User'
 
 Vue.use(Router)
 

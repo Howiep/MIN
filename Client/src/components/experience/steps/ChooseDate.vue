@@ -37,11 +37,6 @@ export default {
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
     }
-  },
-  computed: {
-    computedDateFormatted () {
-      return this.formatDate(this.date)
-    }
   }
 }
 </script>

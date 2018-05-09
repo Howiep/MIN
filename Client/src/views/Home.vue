@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import AddDialog from '@/components/experience/AddExperience'
+import AddDialog from '@/components/experience/AddExperience.vue'
 
 export default {
   name: 'home',

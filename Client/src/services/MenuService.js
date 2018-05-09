@@ -18,7 +18,8 @@ export default {
       const path = menuPath.slice(1)
       return menuItems.find(menuPath => menuPath.path === path).text
     } catch (error) {
-      return 'Failed to get menu item'
+      console.log(error)
+      return 'MIN'
     }
   }
 }

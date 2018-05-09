@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to 
+<!-- Add "scoped" attribute to
 limit CSS to this component only -->
 <style scroped>
 v-bottom-nav{
