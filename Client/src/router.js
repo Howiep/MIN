@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 import Home from '@/views/Home'
 import Register from '@/components/setup/Register'
 import Login from '@/components/auth/Login'
@@ -9,6 +10,22 @@ import ExperiencesPage from '@/views/Experiences'
 import FeedPage from '@/views/Feed'
 import UserPage from '@/views/User'
 
+const ifNotLoggedIn = (to, from, next) => {
+  if (!store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifLoggedIn = (to, from, next) => {
+  if (store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/landing')
+}
+
 Vue.use(Router)
 
 export default new Router({
@@ -17,57 +34,66 @@ export default new Router({
     {
       path: '/',
       name: '',
-      redirect: 'home'
+      redirect: 'home',
+      beforeEnter: ifLoggedIn
     },
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      beforeEnter: ifLoggedIn
     },
 
     // Auth
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      beforeEnter: ifNotLoggedIn
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      beforeEnter: ifNotLoggedIn
     },
 
     // Intro
     {
       path: '/landing',
       name: 'landing',
-      component: LandingPage
+      component: LandingPage,
+      beforeEnter: ifNotLoggedIn
     },
     {
       path: '/intro',
       name: 'intro',
-      component: IntroPage
+      component: IntroPage,
+      beforeEnter: ifNotLoggedIn
     },
 
     // Experience
     {
       path: '/experiences',
       name: 'experiences',
-      component: ExperiencesPage
+      component: ExperiencesPage,
+      beforeEnter: ifLoggedIn
     },
 
     // Feed
     {
       path: '/feed',
       name: 'feed',
-      component: FeedPage
+      component: FeedPage,
+      beforeEnter: ifLoggedIn
     },
 
     // User
     {
       path: '/user',
       name: 'user',
-      component: UserPage
+      component: UserPage,
+      beforeEnter: ifLoggedIn
     }
   ]
 })
