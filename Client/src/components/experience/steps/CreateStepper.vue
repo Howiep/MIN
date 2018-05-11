@@ -10,7 +10,7 @@
     <v-stepper-items class="stepperCard">
       <v-stepper-content step="1">
         <choose-date v-on:setDate="setDate"></choose-date>
-        <p v-if="dateFormatted">Du har valgt: {{ dateFormatted }}</p>
+        <p v-if="entry.dateFormatted">Du har valgt: {{ entry.dateFormatted }}</p>
         <v-btn color="primary" @click.native="e1 = 2">Fortsæt</v-btn>
         <v-btn flat @click="closeMenu()">Annuller</v-btn>
       </v-stepper-content>
@@ -25,7 +25,7 @@
 
       <v-stepper-content step="3">
         <div class="mb-5">
-          <v-text-field multi-line label="Indsæt note" v-model="createNote">
+          <v-text-field multi-line label="Indsæt note" v-model="entry.createNote">
 
           </v-text-field>
         </div>
@@ -42,9 +42,11 @@ export default {
   data () {
     return {
       e1: 1,
-      createNote: '',
-      selectedExperiences: [],
-      dateFormatted: null
+      entry: {
+        createNote: '',
+        selectedExperiences: [],
+        dateFormatted: null
+      }
     }
   },
   methods: {
@@ -52,10 +54,10 @@ export default {
       this.$emit('closeMenu', this.dialog)
     },
     setExperiences (selected) {
-      this.selectedExperiences = selected
+      this.entry.selectedExperiences = selected
     },
     setDate (date) {
-      this.dateFormatted = date
+      this.entry.dateFormatted = date
     }
   },
   components: {
