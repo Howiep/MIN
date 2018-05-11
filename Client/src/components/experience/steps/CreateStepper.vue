@@ -37,9 +37,6 @@
 </template>
 
 <script>
-import ChooseDate from '@/components/experience/steps/ChooseDate'
-import ChooseExperience from '@/components/experience/steps/ChooseExperience'
-
 export default {
   name: 'createStepper',
   data () {
@@ -62,8 +59,8 @@ export default {
     }
   },
   components: {
-    ChooseDate,
-    ChooseExperience
+    'choose-date': () => import('@/components/experience/steps/ChooseDate'),
+    'choose-experience': () => import('@/components/experience/steps/ChooseExperience')
   }
 }
 </script>
