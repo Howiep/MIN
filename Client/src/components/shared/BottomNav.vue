@@ -1,5 +1,5 @@
 <template>
-     <v-bottom-nav app absolute :value="true" :active.sync="e1" color="transparent">
+     <v-bottom-nav v-if="this.isLoggedIn" app absolute :value="true" :active.sync="e1" color="transparent">
        <div v-for="item in menuItems" :key="item.order">
         <v-btn flat color="primary" :value="item.value" :to="item.path" >
           <!-- <span>{{ item.text }}</span> -->
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import store from '@/store'
 import MenuService from '@/services/MenuService'
 
 export default {
@@ -31,6 +32,11 @@ export default {
       this.menuItems = res
     } catch (error) {
       this.message = error.response.data.error
+    }
+  },
+  computed: {
+    isLoggedIn () {
+      return store.state.isLoggedIn
     }
   }
 }

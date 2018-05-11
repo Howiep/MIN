@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import CreateStepper from '@/components/experience/steps/CreateStepper'
 
 export default {
   name: 'addExperience',
@@ -35,7 +34,7 @@ export default {
     }
   },
   components: {
-    CreateStepper
+    'create-stepper': () => import('@/components/experience/steps/CreateStepper')
   },
   methods: {
     closeDialog (dialogStatus) {

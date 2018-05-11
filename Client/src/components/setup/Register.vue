@@ -9,15 +9,20 @@
          </form>
            <br>
           <br>
-          <div v-if="!this.loading">
-            <v-btn class="primary" dark @click="register" >Register</v-btn>
+          <div>
+            <v-btn :loading="loading" :disabled="loading" color="primary" @click.native="register" >
+              Register
+            </v-btn>
           </div>
-          <div v-if="this.loading" >
-            <br>
-            <v-progress-circular indeterminate color="green"></v-progress-circular>
-          </div>
-          <div class="error" v-html="message"></div>
           <br>
+          <v-snackbar
+            :timeout="timeout"
+            :color="snackColor"
+            multi-line
+            v-model="snackbar" >
+            {{ message }}
+            <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
+          </v-snackbar>
     </panel>
    </v-flex>
  </v-layout>
@@ -34,7 +39,10 @@ export default {
       email: '',
       password: '',
       loading: false,
-      message: null
+      message: null,
+      snackbar: false,
+      timeout: 2000,
+      snackColor: 'primary'
     }
   },
   methods: {
@@ -47,11 +55,15 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
-        this.message = 'success'
         this.loading = false
+        this.snackbar = true
+        this.snackColor = 'accent'
+        this.message = 'success: du er logget ind'
       } catch (error) {
         this.loading = false
-        this.message = error.response.data.error
+        this.snackbar = true
+        this.snackColor = 'red'
+        this.message = 'Der skete en fejl'
       }
     }
   },
