@@ -10,7 +10,7 @@
     </v-card-actions>
     <v-card-text>Har du en konto?</v-card-text>
     <v-card-actions>
-    <v-btn class="primary" dark to="intro" >Login</v-btn>
+    <v-btn class="primary" dark to="login" >Login</v-btn>
     </v-card-actions>
   </v-card>
 </template>

@@ -7,40 +7,28 @@
       <v-divider></v-divider>
       <v-stepper-step step="3">Noter<small>Valgfrit</small></v-stepper-step>
     </v-stepper-header>
-    <v-stepper-items>
+    <v-stepper-items class="stepperCard">
       <v-stepper-content step="1">
-        <div>
-            <v-dialog ref="dateDialog" v-model="modal" :return-value.sync="date" persistent lazy full-width width="290px">
-              <v-text-field slot="activator" v-model="date" label="Vælg Dato" prepend-icon="event" readonly></v-text-field>
-              <v-date-picker v-model="date" scrollable>
-                <v-spacer></v-spacer>
-                <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-                <v-btn flat color="primary" @click="$refs.dateDialog.save(date)">OK</v-btn>
-              </v-date-picker>
-            </v-dialog>
-        </div>
-        <div>
-           <v-dialog ref="timeDialog" persistent v-model="modal2" lazy full-width width="290px" :return-value.sync="time">
-            <v-text-field slot="activator" label="Vælg Tid" v-model="time" prepend-icon="access_time" readonly
-            ></v-text-field>
-            <v-time-picker v-model="time" actions>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
-              <v-btn flat color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
-            </v-time-picker>
-          </v-dialog>
-        </div>
-        <p v-if="dateTime">Du har valgt: {{ dateTime }}</p>
+        <choose-date v-on:setDate="setDate"></choose-date>
+        <p v-if="dateFormatted">Du har valgt: {{ dateFormatted }}</p>
         <v-btn color="primary" @click.native="e1 = 2">Fortsæt</v-btn>
         <v-btn flat @click="closeMenu()">Annuller</v-btn>
       </v-stepper-content>
+
       <v-stepper-content step="2">
-        <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+        <div class="mb-5">
+          <choose-experience v-on:setExperiences="setExperiences"></choose-experience>
+        </div>
         <v-btn color="primary" @click.native="e1 = 3">Fortsæt</v-btn>
         <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
+
       <v-stepper-content step="3">
-        <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+        <div class="mb-5">
+          <v-text-field multi-line label="Indsæt note" v-model="createNote">
+
+          </v-text-field>
+        </div>
         <v-btn color="primary" @click="closeMenu()">Færdig</v-btn>
         <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
@@ -49,44 +37,40 @@
 </template>
 
 <script>
+import ChooseDate from '@/components/experience/steps/ChooseDate'
+import ChooseExperience from '@/components/experience/steps/ChooseExperience'
 
 export default {
   name: 'createStepper',
   data () {
     return {
-      e1: 0,
-      date: null,
-      time: null,
-      dateTime: '',
-      modal: false,
-      modal2: false
-    }
-  },
-  watch: {
-    time () {
-      this.chooseTime()
+      e1: 1,
+      createNote: '',
+      selectedExperiences: [],
+      dateFormatted: null
     }
   },
   methods: {
     closeMenu () {
       this.$emit('closeMenu', this.dialog)
     },
-    chooseTime () {
-      this.formatDate(this.date)
-      this.dateTime = this.date + ' ' + this.time
-      this.formatDate(this.dateTime)
-      console.log(this.dateTime)
+    setExperiences (selected) {
+      this.selectedExperiences = selected
     },
-    formatDate (str) {
-      return str.split('-').reverse().join('-')
+    setDate (date) {
+      this.dateFormatted = date
     }
   },
   components: {
+    ChooseDate,
+    ChooseExperience
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+<style scoped>
+.stepperCard > div{
+  height: 100%;
+}
 </style>
