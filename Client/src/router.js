@@ -7,6 +7,7 @@ import Login from '@/components/auth/Login'
 import LandingPage from '@/components/setup/LandingPage'
 import IntroPage from '@/components/setup/Intro'
 import ExperiencesPage from '@/views/Experiences'
+import AddExperiencesPage from '@/views/AddExperience'
 import FeedPage from '@/views/Feed'
 import UserPage from '@/views/User'
 
@@ -77,6 +78,12 @@ export default new Router({
       path: '/experiences',
       name: 'experiences',
       component: ExperiencesPage,
+      beforeEnter: ifLoggedIn
+    },
+    {
+      path: '/experiences-add',
+      name: 'experiences-add',
+      component: AddExperiencesPage,
       beforeEnter: ifLoggedIn
     },
 
