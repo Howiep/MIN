@@ -3,10 +3,7 @@
    <v-app>
      <page-top-nav/>
       <v-content>
-        <v-container xs-fluid >
           <router-view></router-view>
-        </v-container>
-         <!-- Todo: add if(loggedin), so nav is hidden on first load -->
       </v-content>
       <page-bottom-nav app/>
   </v-app>

@@ -69,6 +69,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.stepperCard > div{
+.stepperCard>div{
+  max-width: 100%;
+}
+.stepper__header{
+  height: 50px;
 }
 </style>

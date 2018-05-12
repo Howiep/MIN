@@ -1,4 +1,5 @@
 <template>
+<v-container xs-fluid>
     <v-layout>
     <v-flex>
       <div class="hello">
@@ -7,6 +8,7 @@
       </div>
     </v-flex>
   </v-layout>
+</v-container>
 </template>
 
 <script>
