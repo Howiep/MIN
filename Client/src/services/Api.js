@@ -2,6 +2,6 @@ import axios from 'axios'
 
 export default () => {
   return axios.create({
-    baseURL: 'http://localhost:5000/'
+    baseURL: 'https://still-woodland-62167.herokuapp.com/api/'
   })
 }

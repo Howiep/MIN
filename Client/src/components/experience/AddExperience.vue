@@ -3,7 +3,7 @@
     <v-layout row justify-center>
         <v-btn class="addButton" absolute right fab color="primary" dark @click.stop="dialog = true"><v-icon dark>add</v-icon></v-btn>
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
-          <v-card tile>
+          <v-card tile class="stepperCard">
             <v-toolbar card dark color="primary">
               <v-btn icon @click.native="dialog = false" dark>
                 <v-icon>close</v-icon>
@@ -23,19 +23,18 @@
 </template>
 
 <script>
-import CreateStepper from '@/components/experience/steps/CreateStepper'
 
 export default {
   name: 'addExperience',
   data () {
     return {
-      msg: 'Ny Erfaring',
+      msg: 'Ny erfaring',
       dialog: false,
       e6: 1
     }
   },
   components: {
-    CreateStepper
+    'create-stepper': () => import('@/components/experience/steps/CreateStepper')
   },
   methods: {
     closeDialog (dialogStatus) {
@@ -49,5 +48,8 @@ export default {
 <style scoped>
 .addButton{
   bottom: 75px;
+}
+.stepperCard{
+  height: 100%;
 }
 </style>

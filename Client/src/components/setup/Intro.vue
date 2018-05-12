@@ -7,7 +7,7 @@
     </v-card-title>
     <v-card-text>{{ welcome }}</v-card-text>
     <v-card-actions>
-    <v-btn class="primary" dark to="experience" >Lad os gå igang</v-btn>
+    <v-btn class="primary" dark to="home" >Lad os gå igang</v-btn>
     </v-card-actions>
   </v-card>
 </template>

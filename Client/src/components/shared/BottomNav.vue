@@ -1,7 +1,7 @@
 <template>
-     <v-bottom-nav app absolute :value="true" :active.sync="e1" color="primary">
+     <v-bottom-nav v-if="this.isLoggedIn" app absolute :value="true" :active.sync="e1" color="transparent">
        <div v-for="item in menuItems" :key="item.order">
-        <v-btn flat dark :value="item.value" :to="item.path" >
+        <v-btn flat color="primary" :value="item.value" :to="item.path" >
           <!-- <span>{{ item.text }}</span> -->
           <v-icon>{{ item.icon }}</v-icon>
         </v-btn>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import store from '@/store'
 import MenuService from '@/services/MenuService'
 
 export default {
@@ -32,11 +33,16 @@ export default {
     } catch (error) {
       this.message = error.response.data.error
     }
+  },
+  computed: {
+    isLoggedIn () {
+      return store.state.isLoggedIn
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to 
+<!-- Add "scoped" attribute to
 limit CSS to this component only -->
 <style scroped>
 v-bottom-nav{
