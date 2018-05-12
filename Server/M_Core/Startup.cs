@@ -14,16 +14,23 @@ using Microsoft.IdentityModel.Tokens;
 using M_Data;
 using Microsoft.AspNetCore.Identity;
 using System.Text;
+using M_Core.Extensions;
 
 namespace M_Core
 {
     public class Startup
     {
 
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            
+
         }
+
+
 
         public IConfiguration Configuration { get; }
 
@@ -89,7 +96,11 @@ namespace M_Core
 
             //services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            
 
         }
 

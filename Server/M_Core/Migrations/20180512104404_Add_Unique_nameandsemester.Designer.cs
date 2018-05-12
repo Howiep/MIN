@@ -11,9 +11,10 @@ using System;
 namespace M_Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180512104404_Add_Unique_nameandsemester")]
+    partial class Add_Unique_nameandsemester
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,6 +80,9 @@ namespace M_Core.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Experiences");
                 });
 
@@ -92,6 +96,12 @@ namespace M_Core.Migrations
                     b.Property<int>("Semester");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("Semester")
+                        .IsUnique();
 
                     b.ToTable("ExperienceCategories");
                 });
