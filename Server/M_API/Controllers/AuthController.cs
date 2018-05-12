@@ -36,14 +36,18 @@ namespace M_API.Controllers
         {
 
             var user = context.Users.SingleOrDefault(u => u.Email == model.Email);
-
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, lockoutOnFailure: false, isPersistent: false);
-
-            if (user == null)
+            if (user != null)
             {
-                return NotFound("email or password incorrect");
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, lockoutOnFailure: false, isPersistent: false);
+                if(result.Succeeded == false)
+                {
+                    return NotFound("email or password incorrect");
+                }
+                return Ok(JwtPacket.CreateJwtPacket(user));
+
             }
-            return Ok(JwtPacket.CreateJwtPacket(user));
+            return NotFound("email or password incorrect");
+
         }
 
         [HttpPost("register")]
