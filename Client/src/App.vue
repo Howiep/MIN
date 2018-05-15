@@ -35,4 +35,7 @@ export default {
 .parallax{
   height: 100vh;
 }
+.parallax__content{
+  padding: 0;
+}
 </style>
