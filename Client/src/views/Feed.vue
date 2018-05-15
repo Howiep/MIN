@@ -1,6 +1,6 @@
 <template>
 <v-container xs-fluid>
-    <v-layout>
+  <v-layout>
     <v-flex>
       <div class="hello">
           <h1>{{ msg }}</h1>

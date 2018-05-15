@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar absolute app dark class="primary">
+    <v-toolbar absolute app dark class="primary" >
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
     <v-btn dark to="home">LOGO</v-btn>
     <v-toolbar-title>{{ currentPage }}</v-toolbar-title>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import store from '@/store'
 import MenuService from '@/services/MenuService'
 
 export default {
@@ -47,6 +48,11 @@ export default {
         // todo: proper errorhandling
         this.message = 'error'
       }
+    }
+  },
+  computed: {
+    isLoggedIn () {
+      return store.state.isLoggedIn
     }
   }
 }
