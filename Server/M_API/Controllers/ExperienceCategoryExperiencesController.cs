@@ -35,18 +35,19 @@ namespace M_API.Controllers
         public IEnumerable<ExperienceCategoryViewModel> GetExperiencesWithCategories()
         {
             var experiencesWithCategories = new List<ExperienceCategoryViewModel>();
+
             var allExperiencesAndCategories = _context.ExperienceCategoryExperience
                 .Include(ece => ece.Experience)
                 .Include(ece => ece.ExperienceCategory).ToList();
 
-            foreach (ExperienceCategoryExperience aeac in allExperiencesAndCategories)
+            foreach (ExperienceCategoryExperience aeacc in allExperiencesAndCategories)
             {
 
                 ExperienceCategoryViewModel ecvm = new ExperienceCategoryViewModel();
                 ecvm.Experiences = new List<Experience>();
-                if(aeac.Experience != null)
+                if(aeacc.Experience != null)
                 {
-                    ecvm.Experiences.Add(aeac.Experience);
+                    ecvm.Experiences.Add(aeacc.Experience);
                 }
                 experiencesWithCategories.Add(ecvm);
             }

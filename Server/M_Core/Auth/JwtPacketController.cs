@@ -22,6 +22,7 @@ namespace M_Core.Auth
         {
             public string Token { get; set; }
             public string UserName { get; set; }
+            public string Error { get; set; }
 
             public static JwtPacket CreateJwtPacket(ApplicationUser user)
             {

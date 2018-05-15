@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using static M_Core.Auth.JwtPacketController;
 using M_Core.Data;
 using M_API.ViewModels.Auth;
+using M_API.ViewModels;
+using System.Diagnostics;
 
 namespace M_API.Controllers
 {
@@ -29,6 +31,15 @@ namespace M_API.Controllers
             this.context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+        }
+
+
+        [HttpPost("logout")]
+        public async Task<ActionResult> LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
+
+            return Ok("successfully logged out");
         }
 
         [HttpPost("login")]
@@ -51,17 +62,19 @@ namespace M_API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<JwtPacket> RegisterAsync([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterViewModel model)
         {
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                return JwtPacket.CreateJwtPacket(user);
+                return Ok(JwtPacket.CreateJwtPacket(user));
             }
             else
             {
-                return new JwtPacket() { UserName = result.Errors.First().Description };
+                var error = new ErrorViewModel() { ErrorCode = result.Errors.First().Code, ErrorDescription = result.Errors.First().Description };
+
+                return BadRequest(error);
             }
         }
 
@@ -77,6 +90,77 @@ namespace M_API.Controllers
 
         [Authorize]
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        
+        [Authorize]
+        [HttpPost]
+        // DELETE: api/Experiences/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await _userManager.DeleteAsync(user);
+            
+            return Ok("Deleted user");
+           
+        }
+
+        [Authorize]
+        [HttpPost]
+        // DELETE: api/Experiences/5
+        // WORK IN PROGRESSSSSSSSSSSSSSSSSSSSS!!!
+        public async Task<IActionResult> ResetPassword([FromRoute] string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var success = await _userManager.ResetPasswordAsync(user, resetToken, "");
+            return Ok("reset user");
+        }
+
+
+        // WORK IN PROGRESSSSSSSSSSSSSSSSSSSSS!!!
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser([FromRoute] string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var success = await _userManager.ResetPasswordAsync(user, resetToken, "");
+            return Ok("reset user");
+        }
 
     }
 }
