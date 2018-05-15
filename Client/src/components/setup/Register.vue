@@ -1,11 +1,11 @@
 <template>
-   <v-container>
+   <v-container xs-fluid>
    <v-layout>
      <v-flex>
-      <v-card>
-        <v-toolbar color="primary" dark flat>
+      <div>
+        <v-toolbar color="transparent" flat>
             <v-toolbar-title>
-              Registrer en bruger
+              Opret en bruger
             </v-toolbar-title>
           </v-toolbar>
           <v-card-text>
@@ -31,16 +31,14 @@
                   Tal
                   </div>
               </div>
+              <v-btn block large :loading="loading" :disabled="loading" color="accent" @click.native="register" >
+                              Opret bruger
+              </v-btn>
             </v-form>
           </v-card-text>
-      </v-card>
+      </div>
     </v-flex>
    </v-layout>
-   <v-toolbar>
-        <v-btn :loading="loading" :disabled="loading" color="primary" @click.native="register" >
-                Register
-        </v-btn>
-   </v-toolbar>
     <v-snackbar
               :timeout="timeout"
               :color="snackColor"
@@ -67,7 +65,8 @@ export default {
       snackbar: false,
       timeout: 3000,
       snackColor: 'primary',
-      emailRules: [
+      emailRules:
+      [
         v => !!v || 'E-mail is required',
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ],
@@ -116,4 +115,7 @@ limit CSS to this component only -->
 .frmValidation--passed{
   color: green;
   }
+.container{
+  height: 100vh;
+}
 </style>
