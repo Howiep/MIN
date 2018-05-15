@@ -90,13 +90,18 @@ namespace M_API.Controllers
 
         [Authorize]
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
-        
+
+
+
+        //Deleting was not supported by core 1.0
+        //https://stackoverflow.com/questions/22379297/how-to-delete-user-with-usermanager-in-mvc5#24594440
+        //Although could not find other example of this use.
         [Authorize]
-        [HttpPost]
-        // DELETE: api/Experiences/5
+        // DELETE: api/auth/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] string id)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -117,7 +122,6 @@ namespace M_API.Controllers
 
         [Authorize]
         [HttpPost]
-        // DELETE: api/Experiences/5
         // WORK IN PROGRESSSSSSSSSSSSSSSSSSSSS!!!
         public async Task<IActionResult> ResetPassword([FromRoute] string id)
         {
@@ -135,32 +139,54 @@ namespace M_API.Controllers
 
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-            var success = await _userManager.ResetPasswordAsync(user, resetToken, "");
+            var result = await _userManager.ResetPasswordAsync(user, resetToken, "halohalo123,.-");
+
+            if(result.Succeeded == false)
+            {
+                //remember to refactor into a new function
+                return StatusCode(500, new ErrorViewModel() { ErrorCode = result.Errors.First().Code, ErrorDescription = result.Errors.First().Description });
+            }
+
             return Ok("reset user");
         }
 
 
+        //inspired by https://www.codeproject.com/articles/790720/asp-net-identity-customizing-users-and-roles
         // WORK IN PROGRESSSSSSSSSSSSSSSSSSSSS!!!
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] string id)
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            //username = email in our case
+            ApplicationUser user = await _userManager.FindByEmailAsync(model.username);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            user.Email = model.newEmail;
+            user.PhoneNumber = model.phoneNumber;
 
-            var success = await _userManager.ResetPasswordAsync(user, resetToken, "");
-            return Ok("reset user");
+            var updatedUser = await _userManager.UpdateAsync(user);
+            if(updatedUser.Succeeded == false)
+            {
+                return StatusCode(500, new ErrorViewModel() { ErrorCode = updatedUser.Errors.First().Code, ErrorDescription = updatedUser.Errors.First().Description });
+            }
+            return Ok("updated user succeeded");
+
+
+
         }
+
+
+
+
+
 
     }
 }
