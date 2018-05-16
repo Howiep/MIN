@@ -2,7 +2,7 @@
   <div id="app">
    <v-app>
      <page-top-nav v-if="this.isLoggedIn" app/>
-     <v-parallax height="100%" src="https://i.imgur.com/vOSObWg.jpg">
+     <v-parallax height="100%" src="https://i.imgur.com/kAf0i8U.jpg">
       <v-content class="black--text">
           <router-view></router-view>
       </v-content>

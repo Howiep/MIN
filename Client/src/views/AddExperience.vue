@@ -1,11 +1,13 @@
 <template>
   <div>
-    <v-layout row justify-center>
+    <v-container xs-fluid>
+      <v-layout row justify-center>
           <v-flex class="stepperCard" >
               <create-stepper v-on:closeMenu="closeDialog"></create-stepper>
             <div style="flex: 1 1 auto;"></div>
           </v-flex>
       </v-layout>
+    </v-container>
   </div>
 </template>
 

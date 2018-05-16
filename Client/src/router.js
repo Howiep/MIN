@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
-import Home from '@/views/Home'
-import Register from '@/components/setup/Register'
-import Login from '@/components/auth/Login'
-import LandingPage from '@/components/setup/LandingPage'
 import IntroPage from '@/components/setup/Intro'
 import ExperiencesPage from '@/views/Experiences'
 import AddExperiencesPage from '@/views/AddExperience'
 import FeedPage from '@/views/Feed'
 import UserPage from '@/views/User'
+const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home')
+const Register = () => import(/* webpackChunkName: "register" */ '@/components/setup/Register')
+const Login = () => import(/* webpackChunkName: "login" */ '@/components/auth/Login')
+const LandingPage = () => import(/* webpackChunkName: "landingPage" */ '@/components/setup/LandingPage')
 
 const ifNotLoggedIn = (to, from, next) => {
   if (!store.getters.isLoggedIn) {
@@ -55,52 +55,45 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login,
-      beforeEnter: ifNotLoggedIn
+      component: Login
     },
 
     // Intro
     {
       path: '/landing',
       name: 'landing',
-      component: LandingPage,
-      beforeEnter: ifNotLoggedIn
+      component: LandingPage
     },
     {
       path: '/intro',
       name: 'intro',
-      component: IntroPage,
-      beforeEnter: ifNotLoggedIn
+      component: IntroPage
     },
 
     // Experience
     {
       path: '/experiences',
       name: 'experiences',
-      component: ExperiencesPage,
-      beforeEnter: ifLoggedIn
+      component: ExperiencesPage
     },
     {
       path: '/experiences-add',
       name: 'experiences-add',
-      component: AddExperiencesPage,
-      beforeEnter: ifLoggedIn
+      component: AddExperiencesPage
     },
 
     // Feed
     {
       path: '/feed',
       name: 'feed',
-      component: FeedPage,
-      beforeEnter: ifLoggedIn
+      component: FeedPage
     },
 
     // User
     {
       path: '/user',
       name: 'user',
-      component: UserPage,
-      beforeEnter: ifLoggedIn
+      component: UserPage
     }
   ]
 })
