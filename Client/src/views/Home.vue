@@ -14,7 +14,6 @@
 
 <script>
 // import * as d3 from 'd3'
-import AddDialog from '@/components/experience/AddExperience.vue'
 
 export default {
   name: 'home',
@@ -24,7 +23,7 @@ export default {
     }
   },
   components: {
-    AddDialog
+    'add-dialog': () => import(/* webpackChunkName: "addDialog" */ '@/components/experience/AddExperience')
   }
 }
 </script>
