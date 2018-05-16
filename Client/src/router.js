@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
-import IntroPage from '@/components/setup/Intro'
-import ExperiencesPage from '@/views/Experiences'
-import AddExperiencesPage from '@/views/AddExperience'
-import FeedPage from '@/views/Feed'
-import UserPage from '@/views/User'
-const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home')
-const Register = () => import(/* webpackChunkName: "register" */ '@/components/setup/Register')
-const Login = () => import(/* webpackChunkName: "login" */ '@/components/auth/Login')
+
 const LandingPage = () => import(/* webpackChunkName: "landingPage" */ '@/components/setup/LandingPage')
+const Register = () => import(/* webpackChunkName: "register" */ '@/components/setup/Register')
+const IntroPage = () => import(/* webpackChunkName: "intro" */ '@/components/setup/Intro')
+const Login = () => import(/* webpackChunkName: "login" */ '@/components/auth/Login')
+const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home')
+const ExperiencesPage = () => import(/* webpackChunkName: "experiences" */ '@/views/Experiences')
+const AddExperiencesPage = () => import(/* webpackChunkName: "addExperiences" */ '@/views/AddExperience')
+const FeedPage = () => import(/* webpackChunkName: "feed" */ '@/views/Feed')
+const UserPage = () => import(/* webpackChunkName: "user" */ '@/views/User')
 
 const ifNotLoggedIn = (to, from, next) => {
   if (!store.getters.isLoggedIn) {
@@ -35,14 +36,12 @@ export default new Router({
     {
       path: '/',
       name: '',
-      redirect: 'home',
-      beforeEnter: ifLoggedIn
+      redirect: 'home'
     },
     {
       path: '/home',
       name: 'home',
-      component: Home,
-      beforeEnter: ifLoggedIn
+      component: Home
     },
 
     // Auth
@@ -93,7 +92,8 @@ export default new Router({
     {
       path: '/user',
       name: 'user',
-      component: UserPage
+      component: UserPage,
+      beforeEnter: ifLoggedIn
     }
   ]
 })
