@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import AddDialog from '@/components/experience/AddExperience'
-
 export default {
   name: 'experiences',
   data () {
@@ -23,7 +21,7 @@ export default {
     }
   },
   components: {
-    AddDialog
+    'add-dialog': () => import('@/components/experience/AddExperience')
   }
 }
 </script>
