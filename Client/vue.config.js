@@ -8,9 +8,6 @@ const pwaArgs = {
 
 module.exports = {
   lintOnSave: false,
-  configureWebpack: {
-    entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js']
-  },
   chainWebpack: config => {
     config.plugin('pwa').tap(args => {
       return [pwaArgs]
