@@ -21,7 +21,7 @@ export default {
     }
   },
   components: {
-    'add-dialog': () => import('@/components/experience/AddExperience')
+    'add-dialog': () => import(/* webpackChunkName: "addDialog" */ '@/components/experience/AddExperience')
   }
 }
 </script>

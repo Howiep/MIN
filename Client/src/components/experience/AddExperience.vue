@@ -34,7 +34,7 @@ export default {
     }
   },
   components: {
-    'create-stepper': () => import('@/components/experience/steps/CreateStepper')
+    'create-stepper': () => import(/* webpackChunkName: "createStepper" */ '@/components/experience/steps/CreateStepper')
   },
   methods: {
     closeDialog (dialogStatus) {
