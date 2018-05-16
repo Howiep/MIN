@@ -1,13 +1,13 @@
 <template>
   <div id="app">
    <v-app>
-     <page-top-nav v-if="this.isLoggedIn" app/>
+     <page-top-nav  app/>
      <v-parallax height="100%" src="https://i.imgur.com/kAf0i8U.jpg">
       <v-content class="black--text">
           <router-view></router-view>
       </v-content>
      </v-parallax>
-      <page-bottom-nav v-if="this.isLoggedIn" app/>
+      <page-bottom-nav  app/>
   </v-app>
 </div>
 </template>
