@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
 
+// Code splitting, webpack will make these into a file each on top of the reguler bundling.
 const LandingPage = () => import(/* webpackChunkName: "landingPage" */ '@/components/setup/LandingPage')
 const Register = () => import(/* webpackChunkName: "register" */ '@/components/setup/Register')
 const IntroPage = () => import(/* webpackChunkName: "intro" */ '@/components/setup/Intro')
 const Login = () => import(/* webpackChunkName: "login" */ '@/components/auth/Login')
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home')
 const ExperiencesPage = () => import(/* webpackChunkName: "experiences" */ '@/views/Experiences')
-const AddExperiencesPage = () => import(/* webpackChunkName: "addExperiences" */ '@/views/AddExperience')
 const FeedPage = () => import(/* webpackChunkName: "feed" */ '@/views/Feed')
 const UserPage = () => import(/* webpackChunkName: "user" */ '@/views/User')
 
@@ -74,11 +74,6 @@ export default new Router({
       path: '/experiences',
       name: 'experiences',
       component: ExperiencesPage
-    },
-    {
-      path: '/experiences-add',
-      name: 'experiences-add',
-      component: AddExperiencesPage
     },
 
     // Feed
