@@ -3,19 +3,23 @@ const categories = [
     id: 0,
     semester: 4,
     name: 'fødselshjælp',
-    actions: [
-      'Temperaturmåling',
-      'Modtagelse af familien',
-      'Samtale om og planlægning af barselsomsorgen',
-      'Vejledning i personlig hygiejne',
-      'Vejledning om kvindens fysiologiske forandringer pp',
-      'Observation af bristning og episiotomi',
-      'telefonsamtale med fødende',
-      'Forberedelse til modtagelse',
-      'modtage i modtagelse/fødegang',
-      'Vejledning ved bristning og episiotomi',
-      'Palpation af uterus p.p.',
-      'Observation og vejledning omkring lokkier'
+    groups: [
+      {
+        name: 'konsultation',
+        actions: [
+          'Temperaturmåling',
+          'Modtagelse af familien',
+          'Samtale om og planlægning af barselsomsorgen',
+          'Vejledning i personlig hygiejne',
+          'Vejledning om kvindens fysiologiske forandringer pp',
+          'Observation af bristning og episiotomi',
+          'telefonsamtale med fødende',
+          'Forberedelse til modtagelse',
+          'modtage i modtagelse/fødegang',
+          'Vejledning ved bristning og episiotomi',
+          'Palpation af uterus p.p.',
+          'Observation og vejledning omkring lokkier'
+        ]}
     ]
   },
   {

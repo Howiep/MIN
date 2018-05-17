@@ -41,7 +41,7 @@ export default {
   name: 'createStepper',
   data () {
     return {
-      e1: 1,
+      e1: 2,
       entry: {
         createNote: '',
         selectedExperiences: [],
@@ -69,6 +69,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.stepperCard > div{
+.stepper__content{
+  padding: 5px;
+  height: 100vh;
+}
+.stepper__header{
+  height: 50px;
 }
 </style>
