@@ -21,16 +21,10 @@ namespace M_Core
     public class Startup
     {
 
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            
-
         }
-
-
 
         public IConfiguration Configuration { get; }
 
@@ -38,8 +32,10 @@ namespace M_Core
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQL")));
+            var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? " 0.0.0.0:1401";
+            var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD") ?? "Maskine1234";
+            var connString = $"Data Source={hostname};Initial Catalog=M_Db;User=sa;Password={password};";
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(connString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
@@ -48,7 +44,6 @@ namespace M_Core
             })
                .AddEntityFrameworkStores<DataContext>()
                .AddDefaultTokenProviders();
-
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -106,14 +101,13 @@ namespace M_Core
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
-            
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            
+
         }
     }
 }

@@ -22,27 +22,6 @@ namespace M_Core
         {
             var host = BuildWebHost(args);
 
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    //inspired by: https://www.locktar.nl/programming/net-core/seed-database-users-roles-dotnet-core-2-0-ef/
-                    var context = services.GetRequiredService<DataContext>();
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-                    var dbInitializerLogger = services.GetRequiredService<ILogger<DBSeeder>>();
-                    DBSeeder.Initialize(context, userManager, roleManager, dbInitializerLogger).Wait();
-
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while seeding the database.");
-                }
-            }
-
             host.Run();
         }
 

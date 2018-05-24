@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using M_Data;
 using Microsoft.AspNetCore.Authorization;
-using static M_Core.Auth.JwtPacketController;
 using M_Core.Data;
 using M_API.ViewModels.Auth;
 using M_API.ViewModels;
 using System.Diagnostics;
 using M_Core.Services;
+using M_Core.Auth;
 
 namespace M_API.Controllers
 {
@@ -106,7 +106,7 @@ namespace M_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] string id)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -120,9 +120,9 @@ namespace M_API.Controllers
             }
 
             await _userManager.DeleteAsync(user);
-            
+
             return Ok("Deleted user");
-           
+
         }
 
         [Authorize]
