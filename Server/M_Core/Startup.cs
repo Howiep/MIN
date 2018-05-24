@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,9 +41,14 @@ namespace M_Core
             
             services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQL")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+            {
+                //prevents registered users from logging in until their email is confirmed. see https://docs.microsoft.com/en-us/aspnet/core/security/authentication/accconfirm?view=aspnetcore-2.0&tabs=aspnetcore2x#require-email-confirmation
+                config.SignIn.RequireConfirmedEmail = true;
+            })
                .AddEntityFrameworkStores<DataContext>()
                .AddDefaultTokenProviders();
+
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -92,6 +97,7 @@ namespace M_Core
                     ValidateIssuerSigningKey = true
                 };
             });
+
 
 
             //services.AddTransient<IEmailSender, EmailSender>();

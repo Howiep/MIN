@@ -11,9 +11,10 @@ using System;
 namespace M_Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180520121950_WorkAndGroup")]
+    partial class WorkAndGroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,9 +78,17 @@ namespace M_Core.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("GroupID");
+
                     b.Property<string>("Name");
 
+                    b.Property<int?>("ShiftID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("GroupID");
+
+                    b.HasIndex("ShiftID");
 
                     b.ToTable("Experiences");
                 });
@@ -115,8 +124,6 @@ namespace M_Core.Migrations
                 {
                     b.Property<int>("GroupID")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("GroupName");
 
                     b.HasKey("GroupID");
 
@@ -272,6 +279,17 @@ namespace M_Core.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("M_Data.Experience", b =>
+                {
+                    b.HasOne("M_Data.Group")
+                        .WithMany("Experiences")
+                        .HasForeignKey("GroupID");
+
+                    b.HasOne("M_Data.Shift")
+                        .WithMany("Experiences")
+                        .HasForeignKey("ShiftID");
                 });
 
             modelBuilder.Entity("M_Data.ExperienceCategoryExperience", b =>

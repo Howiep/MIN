@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using M_Core.Data;
 using M_Core.Extensions;
+using M_Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +27,14 @@ namespace M_Core
                 var services = scope.ServiceProvider;
                 try
                 {
+                    //inspired by: https://www.locktar.nl/programming/net-core/seed-database-users-roles-dotnet-core-2-0-ef/
                     var context = services.GetRequiredService<DataContext>();
-                    DBSeeder.Initialize(context);
+                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+                    var dbInitializerLogger = services.GetRequiredService<ILogger<DBSeeder>>();
+                    DBSeeder.Initialize(context, userManager, roleManager, dbInitializerLogger).Wait();
+
                 }
                 catch (Exception ex)
                 {

@@ -29,7 +29,7 @@ namespace M_API.Controllers
             return _context.ExperienceCategoryExperience;
         }
 
-        // GET: api/ExperiencesWithCategories
+        // GET: api/ExperienceCategoryExperiences/GetExperiencesWithCategories
         [HttpGet]
         [Route("GetExperiencesWithCategories")]
         public IEnumerable<ExperienceCategoryViewModel> GetExperiencesWithCategories()
@@ -40,17 +40,45 @@ namespace M_API.Controllers
                 .Include(ece => ece.Experience)
                 .Include(ece => ece.ExperienceCategory).ToList();
 
-            foreach (ExperienceCategoryExperience aeacc in allExperiencesAndCategories)
+            var allCategories = _context.ExperienceCategories;
+            foreach(ExperienceCategory category in allCategories)
+            {
+                ExperienceCategoryViewModel ecvm = new ExperienceCategoryViewModel();
+                ecvm.Experiences = new List<string>();
+                List<ExperienceCategoryExperience> experiencesInThatCategory = allExperiencesAndCategories.Where(c => c.ExperienceCategory == category).ToList();
+
+                if (experiencesInThatCategory != null)
+                {
+                    //category name
+                    ecvm.Name = category.Name;
+                    //category semester
+                    ecvm.Semester = category.Semester;
+                }
+                foreach (ExperienceCategoryExperience eitc in experiencesInThatCategory)
+                {
+                   //the experiences
+                   ecvm.Experiences.Add(eitc.Experience.Name);
+                }
+                experiencesWithCategories.Add(ecvm);
+                
+
+
+            }
+
+
+            /*foreach (ExperienceCategoryExperience aeacc in allExperiencesAndCategories)
             {
 
                 ExperienceCategoryViewModel ecvm = new ExperienceCategoryViewModel();
-                ecvm.Experiences = new List<Experience>();
+                ecvm.Experiences = new List<string>();
                 if(aeacc.Experience != null)
                 {
-                    ecvm.Experiences.Add(aeacc.Experience);
+                    ecvm.Name = aeacc.ExperienceCategory.Name;
+                    ecvm.Semester = aeacc.ExperienceCategory.Semester;
+                    ecvm.Experiences.Add(aeacc.Experience.Name);
                 }
                 experiencesWithCategories.Add(ecvm);
-            }
+            }*/
 
             return experiencesWithCategories;
         }

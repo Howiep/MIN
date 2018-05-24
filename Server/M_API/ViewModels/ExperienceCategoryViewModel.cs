@@ -8,7 +8,8 @@ namespace M_API.ViewModels
 {
     public class ExperienceCategoryViewModel
     {
-
-        public ICollection<Experience> Experiences { get; set; }
+        public int Semester { get; set; }
+        public string Name { get; set; }
+        public List<string> Experiences { get; set; }
     }
 }

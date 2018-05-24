@@ -12,6 +12,7 @@ using M_Core.Data;
 using M_API.ViewModels.Auth;
 using M_API.ViewModels;
 using System.Diagnostics;
+using M_Core.Services;
 
 namespace M_API.Controllers
 {
@@ -21,15 +22,19 @@ namespace M_API.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        //private readonly IEmailSender _emailSender;
+
         readonly DataContext context;
 
         public AuthController(
             DataContext context,
             UserManager<ApplicationUser> userManager,
+            /*IEmailSender emailSender,*/
             SignInManager<ApplicationUser> signInManager)
         {
             this.context = context;
             _userManager = userManager;
+            //_emailSender = emailSender;
             _signInManager = signInManager;
         }
 
@@ -82,7 +87,7 @@ namespace M_API.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            //middleware uses something with (watch chapter 47) and look into nameidentifier, this
+            //middleware uses something with (Shift chapter 47) and look into nameidentifier, this
             //also this only works because the first one is the tokenidentifer. This should be changed accordingly
 
             return Ok(GetCurrentUserAsync());
