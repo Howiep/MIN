@@ -22,6 +22,14 @@ namespace M_Core
         {
             var host = BuildWebHost(args);
 
+            // Db seeder
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = serviceScope.ServiceProvider.GetService<DataContext>();
+                DbSeeder.SeedExperiences(context);
+            }
+
             host.Run();
         }
 
