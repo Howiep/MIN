@@ -11,10 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using M_Data;
 using Microsoft.AspNetCore.Identity;
 using System.Text;
 using M_Core.Extensions;
+using M_Data.models;
 
 namespace M_Core
 {
@@ -32,10 +32,8 @@ namespace M_Core
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? " 0.0.0.0:1401";
-            var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD") ?? "Maskine1234";
-            var connString = $"Data Source={hostname};Initial Catalog=M_Db;User=sa;Password={password};";
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(connString));
+
+            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQL")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
