@@ -10,6 +10,12 @@ namespace M_Data
         public string Name { get; set; }
         public ICollection<ExperienceCategoryExperience> ExperienceCategoryExperience { get; set; }
 
+        public ICollection<GroupExperiences> GroupExperiences { get; set; }
+
+        public ICollection<ShiftExperiences> ShiftExperiences { get; set; }
+
+
+
         public Experience()
         {
             
