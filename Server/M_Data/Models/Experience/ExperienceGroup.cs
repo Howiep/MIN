@@ -4,9 +4,9 @@ using System.Text;
 
 namespace M_Data.models
 {
-    public class Group
+    public class ExperienceGroup
     {
-        public int GroupID { get; set; }
+        public int ID { get; set; }
         public string GroupName { get; set; }
     }
 }

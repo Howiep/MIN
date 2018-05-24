@@ -8,6 +8,7 @@ namespace M_Data.models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-
+        public ExperienceCategory ExperienceCategory { get; set; }
+        public ExperienceGroup ExperienceGroup { get; set; }
     }
 }
