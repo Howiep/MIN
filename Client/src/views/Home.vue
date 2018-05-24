@@ -5,6 +5,7 @@
       <div class="hello">
           <h1>{{ msg }}</h1>
           <h2>Homepage</h2>
+          <!-- <babies></babies> -->
           <add-dialog></add-dialog>
       </div>
     </v-flex>
@@ -23,7 +24,8 @@ export default {
     }
   },
   components: {
-    'add-dialog': () => import(/* webpackChunkName: "addDialog" */ '@/components/experience/AddExperience')
+    'add-dialog': () => import(/* webpackChunkName: "addDialog" */ '@/components/experience/AddExperience'),
+    'babies': () => import(/* webpackChunkName: "babiesScore" */ '@/components/baby/Baby')
   }
 }
 </script>

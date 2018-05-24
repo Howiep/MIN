@@ -11,15 +11,17 @@
   <v-tabs-items v-model="currentItem" class="actionList">
     <v-tab-item v-for="item in experienceList" :key="item.id" :id="'tab-' + item.id">
       <v-card v-if="!search" class="scroll-y chooseList">
-        <v-list-tile ripple @click="toggle(i)" v-for="i in item.actions" :key="i.index" avatar>
+        <div v-for="group in item.groups" :key="group.index">
+          <v-list-tile ripple @click="toggle(action)" v-for="action in group.actions" :key="action.index" avatar>
             <v-list-tile-content>
-              <v-list-tile-title>{{ i }}</v-list-tile-title>
+              <v-list-tile-title>{{ action }}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-icon color="grey lighten-1" v-if="selected.indexOf(i) < 0">check_box_outline_blank</v-icon>
+              <v-icon color="grey lighten-1" v-if="selected.indexOf(action) < 0">check_box_outline_blank</v-icon>
               <v-icon color="underline" v-else>check_box</v-icon>
             </v-list-tile-action>
         </v-list-tile>
+        </div>
       </v-card>
       <v-card v-if="search" class="scroll-y chooseList">
         <v-list-tile ripple @click="toggle(i)" v-for="i in filteredList" :key="i" avatar>
@@ -93,6 +95,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .chooseList{
+    max-height: calc(100vh - 320px);
 
 }
 </style>

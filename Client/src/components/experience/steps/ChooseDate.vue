@@ -3,7 +3,7 @@
    <div>
         <v-dialog ref="dateDialog" v-model="modal" :return-value.sync="date" persistent lazy full-width width="290px">
           <v-text-field slot="activator" v-model="date" label="Vælg Dato" prepend-icon="event" readonly></v-text-field>
-          <v-date-picker v-model="date" scrollable>
+          <v-date-picker v-model="date" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
             <v-btn flat color="primary" @click="$refs.dateDialog.save(date)">OK</v-btn>
@@ -22,6 +22,25 @@ export default {
       date: null,
       dateFormatted: null,
       modal: false
+    }
+  },
+  async mounted () {
+    try {
+      let today = new Date()
+      let dd = today.getDate()
+      let mm = today.getMonth()+1 //January is 0!
+      let yyyy = today.getFullYear()
+      if(dd<10) {
+          dd = '0'+dd
+      }
+
+      if(mm<10) {
+          mm = '0'+mm
+      }
+      today = yyyy + '-' + mm + '-' + dd
+      this.date = today
+    } catch (error) {
+      console.log(error)
     }
   },
   watch: {

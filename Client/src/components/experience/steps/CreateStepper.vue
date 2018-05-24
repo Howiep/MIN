@@ -11,26 +11,25 @@
       <v-stepper-content step="1">
         <choose-date v-on:setDate="setDate"></choose-date>
         <p v-if="entry.dateFormatted">Du har valgt: {{ entry.dateFormatted }}</p>
-        <v-btn color="primary" @click.native="e1 = 2">Fortsæt</v-btn>
-        <v-btn flat @click="closeMenu()">Annuller</v-btn>
+        <v-btn color="primary" block @click.native="e1 = 2">Fortsæt</v-btn>
+        <v-btn flat block @click="closeMenu()">Annuller</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <div class="mb-5">
+        <div class="mb-3">
           <choose-experience v-on:setExperiences="setExperiences"></choose-experience>
         </div>
-        <v-btn color="primary" @click.native="e1 = 3">Fortsæt</v-btn>
-        <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
+        <v-btn color="primary" block @click.native="e1 = 3">Fortsæt</v-btn>
+        <v-btn flat block @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="3">
         <div class="mb-5">
           <v-text-field multi-line label="Indsæt note" v-model="entry.createNote">
-
           </v-text-field>
         </div>
-        <v-btn color="primary" @click="closeMenu()">Færdig</v-btn>
-        <v-btn flat @click.native="e1 = e1 - 1">Tilbage</v-btn>
+        <v-btn color="primary" block @click="closeMenu()">indsæt vagt</v-btn>
+        <v-btn flat block @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -69,6 +68,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.stepperCard > div{
+.stepper__content{
+  padding: 5px;
+  height: 100vh;
+}
+.stepper__header{
+  height: 50px;
 }
 </style>
