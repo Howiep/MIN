@@ -17,10 +17,10 @@ namespace M_Core.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("M_Data.ApplicationUser", b =>
+            modelBuilder.Entity("M_Data.models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -67,104 +67,10 @@ namespace M_Core.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("M_Data.Experience", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Experiences");
-                });
-
-            modelBuilder.Entity("M_Data.ExperienceCategory", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Semester");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ExperienceCategories");
-                });
-
-            modelBuilder.Entity("M_Data.ExperienceCategoryExperience", b =>
-                {
-                    b.Property<int>("ExperienceCategoryID");
-
-                    b.Property<int>("ExperienceID");
-
-                    b.HasKey("ExperienceCategoryID", "ExperienceID");
-
-                    b.HasIndex("ExperienceID");
-
-                    b.ToTable("ExperienceCategoryExperience");
-                });
-
-            modelBuilder.Entity("M_Data.Group", b =>
-                {
-                    b.Property<int>("GroupID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("GroupName");
-
-                    b.HasKey("GroupID");
-
-                    b.ToTable("Group");
-                });
-
-            modelBuilder.Entity("M_Data.GroupExperiences", b =>
-                {
-                    b.Property<int>("ExperienceID");
-
-                    b.Property<int>("GroupID");
-
-                    b.HasKey("ExperienceID", "GroupID");
-
-                    b.HasIndex("GroupID");
-
-                    b.ToTable("ExperienceGroups");
-                });
-
-            modelBuilder.Entity("M_Data.Shift", b =>
-                {
-                    b.Property<int>("ShiftID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Note");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("ShiftID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Shift");
-                });
-
-            modelBuilder.Entity("M_Data.ShiftExperiences", b =>
-                {
-                    b.Property<int>("ExperienceID");
-
-                    b.Property<int>("ShiftID");
-
-                    b.HasKey("ExperienceID", "ShiftID");
-
-                    b.HasIndex("ShiftID");
-
-                    b.ToTable("ShiftExperiences");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -185,7 +91,8 @@ namespace M_Core.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -274,52 +181,6 @@ namespace M_Core.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("M_Data.ExperienceCategoryExperience", b =>
-                {
-                    b.HasOne("M_Data.ExperienceCategory", "ExperienceCategory")
-                        .WithMany("ExperienceCategoryExperience")
-                        .HasForeignKey("ExperienceCategoryID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("M_Data.Experience", "Experience")
-                        .WithMany("ExperienceCategoryExperience")
-                        .HasForeignKey("ExperienceID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("M_Data.GroupExperiences", b =>
-                {
-                    b.HasOne("M_Data.Experience", "Experience")
-                        .WithMany("GroupExperiences")
-                        .HasForeignKey("ExperienceID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("M_Data.Group", "Group")
-                        .WithMany("GroupExperiences")
-                        .HasForeignKey("GroupID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("M_Data.Shift", b =>
-                {
-                    b.HasOne("M_Data.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("M_Data.ShiftExperiences", b =>
-                {
-                    b.HasOne("M_Data.Experience", "Experience")
-                        .WithMany("ShiftExperiences")
-                        .HasForeignKey("ExperienceID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("M_Data.Shift", "Shift")
-                        .WithMany("ShiftExperiences")
-                        .HasForeignKey("ShiftID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -330,7 +191,7 @@ namespace M_Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("M_Data.ApplicationUser")
+                    b.HasOne("M_Data.models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -338,7 +199,7 @@ namespace M_Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("M_Data.ApplicationUser")
+                    b.HasOne("M_Data.models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -351,7 +212,7 @@ namespace M_Core.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("M_Data.ApplicationUser")
+                    b.HasOne("M_Data.models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -359,7 +220,7 @@ namespace M_Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("M_Data.ApplicationUser")
+                    b.HasOne("M_Data.models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

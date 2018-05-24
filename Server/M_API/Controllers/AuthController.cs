@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using M_Data;
 using Microsoft.AspNetCore.Authorization;
-using M_Core.Data;
 using M_API.ViewModels.Auth;
 using M_API.ViewModels;
 using System.Diagnostics;
 using M_Core.Services;
 using M_Core.Auth;
+using M_Core.Data;
+using M_Data.models;
 
 namespace M_API.Controllers
 {
