@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       msg: 'Ny erfaring',
-      dialog: false,
+      dialog: true,
       e6: 1
     }
   },

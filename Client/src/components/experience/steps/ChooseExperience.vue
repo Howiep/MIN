@@ -10,8 +10,38 @@
   </v-toolbar>
   <v-tabs-items v-model="currentItem" class="actionList">
     <v-tab-item v-for="item in experienceList" :key="item.id" :id="'tab-' + item.id">
+
       <v-card v-if="!search" class="scroll-y chooseList">
-        <div v-for="group in item.groups" :key="group.index">
+        <v-list>
+          <v-list-group
+            v-for="group in item.groups"
+            v-model="group.active"
+            :key="group.name"
+            no-action
+          >
+            <v-list-tile slot="activator" @click="toggle(group.actions)">
+              <v-list-tile-content>
+                <v-list-tile-title>{{ group.name }}</v-list-tile-title>
+              </v-list-tile-content>
+              <v-list-tile-action>
+                <v-icon color="grey lighten-1" v-if="selected.indexOf(group.actions) < 0">check_box_outline_blank</v-icon>
+                <v-icon color="underline" v-else>check_box</v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+            <v-list-tile v-for="action in group.actions" :key="action.index" ripple @click="toggle(action)">
+              <v-list-tile-content>
+                <v-list-tile-title>{{ action }}</v-list-tile-title>
+              </v-list-tile-content>
+              <v-list-tile-action>
+                <v-icon color="grey lighten-1" v-if="selected.indexOf(action) < 0">check_box_outline_blank</v-icon>
+                <v-icon color="underline" v-else>check_box</v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-list-group>
+
+        </v-list>
+
+        <!-- <div v-for="group in item.groups" :key="group.index">
           <v-list-tile ripple @click="toggle(action)" v-for="action in group.actions" :key="action.index" avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ action }}</v-list-tile-title>
@@ -21,8 +51,9 @@
               <v-icon color="underline" v-else>check_box</v-icon>
             </v-list-tile-action>
         </v-list-tile>
-        </div>
+        </div> -->
       </v-card>
+
       <v-card v-if="search" class="scroll-y chooseList">
         <v-list-tile ripple @click="toggle(i)" v-for="i in filteredList" :key="i" avatar>
             <v-list-tile-content>
@@ -34,6 +65,7 @@
             </v-list-tile-action>
         </v-list-tile>
       </v-card>
+
     </v-tab-item>
   </v-tabs-items>
 </div>
@@ -61,8 +93,10 @@ export default {
 
       // extract actions from categories
       res.forEach(experienceList => {
-        experienceList.actions.forEach(actions => {
-          this.actions.add(actions)
+        experienceList.groups.forEach(groups => {
+            groups.actions.forEach(actions => {
+            this.actions.add(actions)
+          })
         })
       })
     } catch (error) {
@@ -76,6 +110,12 @@ export default {
       if (i > -1) {
         this.selected.splice(i, 1)
       } else {
+        if (value.count > 0) {
+          value.forEach(action => {
+            console.log(action)
+                this.selected.push(action)
+            })
+        }
         this.selected.push(value)
       }
       this.$emit('setExperiences', this.selected)

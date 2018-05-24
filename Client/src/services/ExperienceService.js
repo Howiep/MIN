@@ -3,6 +3,7 @@ const categories = [
     id: 0,
     semester: 4,
     name: 'fødselshjælp',
+    icon: 'local_activity',
     groups: [
       {
         name: 'konsultation',
@@ -11,7 +12,11 @@ const categories = [
           'Modtagelse af familien',
           'Samtale om og planlægning af barselsomsorgen',
           'Vejledning i personlig hygiejne',
-          'Vejledning om kvindens fysiologiske forandringer pp',
+          'Vejledning om kvindens fysiologiske forandringer pp'
+        ]},
+      {
+        name: 'Forberedelse',
+        actions: [
           'Observation af bristning og episiotomi',
           'telefonsamtale med fødende',
           'Forberedelse til modtagelse',
@@ -26,6 +31,7 @@ const categories = [
     id: 1,
     semester: 4,
     name: 'barselsomsorg',
+    icon: 'healing',
     groups: [
       {
         name: 'Barselshjælp',
@@ -49,6 +55,7 @@ const categories = [
     id: 2,
     semester: 4,
     name: 'omsorg for mor med kompliceret barsel',
+    icon: 'school',
     groups: [
       {
         name: 'kompliceret fødsel',
@@ -73,6 +80,7 @@ const categories = [
     id: 3,
     semester: 4,
     name: 'observation og pleje af det nyfødte syge barn',
+    icon: 'directions_run',
     groups: [
       {
         name: 'observation',
