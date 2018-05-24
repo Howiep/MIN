@@ -28,6 +28,22 @@ namespace M_API.Controllers
             return _context.Experiences;
         }
 
+        // GET: api/Experiences/GetExperienceNames
+        [HttpGet]
+        [Route("GetExperienceNames")]
+        public IEnumerable<string> GetExperienceNames()
+        {
+            List<string> experienceNames = new List<string>();
+            List<Experience> experiences = _context.Experiences.ToList();
+
+            foreach (Experience e in experiences) 
+            {
+                experienceNames.Add(e.Name);
+            }
+
+            return experienceNames;
+        }
+
         // GET: api/Experiences/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExperience([FromRoute] int id)
