@@ -6,9 +6,10 @@ namespace M_Data.models
 {
     public class Experience
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public ExperienceCategory ExperienceCategory { get; set; }
         public ExperienceGroup ExperienceGroup { get; set; }
+        public int Semester { get; set; }
     }
 }

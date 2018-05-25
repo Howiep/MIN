@@ -6,7 +6,7 @@ namespace M_Data.models
 {
     public class ExperienceGroup
     {
-        public int ID { get; set; }
-        public string GroupName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace M_Core
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = serviceScope.ServiceProvider.GetService<DataContext>();
+                var context = services.GetRequiredService<DataContext>();
                 DbSeeder.SeedExperiences(context);
             }
 
