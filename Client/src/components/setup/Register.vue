@@ -84,11 +84,12 @@ export default {
           password: this.password
         })
         this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setUser', response.data.userName)
         this.loading = false
         this.snackbar = true
         this.snackColor = 'accent'
         this.message = 'success: du er logget ind'
+        router.push('home')
       } catch (error) {
         console.log(error)
         this.loading = false

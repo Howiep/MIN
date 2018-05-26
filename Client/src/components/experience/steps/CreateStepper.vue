@@ -40,7 +40,7 @@ export default {
   name: 'createStepper',
   data () {
     return {
-      e1: 2,
+      e1: 1,
       entry: {
         createNote: '',
         selectedExperiences: [],

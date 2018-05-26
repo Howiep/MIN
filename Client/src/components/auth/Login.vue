@@ -1,30 +1,34 @@
 <template>
+ <v-container xs-fluid>
  <v-layout>
    <v-flex>
-     <panel title="Login">
-       <br>
-         <form name="tab-tracker-form" autocomplete="off">
-            <v-text-field name="email" label="Email" v-model="email"></v-text-field>
-            <v-text-field type="password" name="password" label="Password" v-model="password"></v-text-field>
-          </form>
-          <br>
-          <br>
-          <div>
-            <v-btn :loading="loading" :disabled="loading" color="primary" @click.native="login" >
+     <div>
+        <v-toolbar color="transparent" flat>
+            <v-toolbar-title>
               Login
-            </v-btn>
-          </div>
-          <v-snackbar
-            :timeout="timeout"
-            :color="snackColor"
-            multi-line
-            v-model="snackbar" >
-            {{ message }}
-            <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
-          </v-snackbar>
-     </panel>
+            </v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form name="tab-tracker-form" autocomplete="off">
+              <v-text-field required name="email" label="Email" v-model="email"></v-text-field>
+              <v-text-field required autocomplete="new-password" type="password" name="password" label="Password" v-model="password"></v-text-field>
+              <v-btn block large :loading="loading" :disabled="loading" color="accent" @click.native="login" >
+                  Login
+              </v-btn>
+            </v-form>
+          </v-card-text>
+      </div>
    </v-flex>
  </v-layout>
+  <v-snackbar
+              :timeout="timeout"
+              :color="snackColor"
+              vertical
+              v-model="snackbar" >
+              {{ message }}
+              <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
+  </v-snackbar>
+ </v-container>
 </template>
 
 <script>
@@ -53,17 +57,19 @@ export default {
           password: this.password
         })
         this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setUser', response.data.userName)
+        console.log(response)
         this.loading = false
         this.snackbar = true
         this.snackColor = 'accent'
         this.message = 'success: du er logget ind'
+        this.$router.push('home')
       } catch (error) {
         this.loading = false
         this.snackbar = true
         this.snackColor = 'red'
         this.message = 'Der skete en fejl'
-        console.log(error.response.data.error)
+        console.log(error)
       }
     }
   },
