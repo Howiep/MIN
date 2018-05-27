@@ -1,4 +1,6 @@
 ﻿using M_Data.models;
+using M_Data.Models.InternshipLocation;
+using M_Data.Models.Shift;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,8 +15,14 @@ namespace M_Core.Data
     {
 
         public DbSet<Experience> Experiences { get; set; }
-        public DbSet<ExperienceGroup> ExperienceGroups { get; set; }
         public DbSet<ExperienceCategory> ExperienceCategories { get; set; }
+        public DbSet<ExperienceGroup> ExperienceGroups { get; set; }
+        
+        public DbSet<InternshipLocation> InternShipLocations { get; set; }
+        public DbSet<Child> Children { get; set; }
+
+        public DbSet<Shift> Shifts { get; set; }
+        public DbSet<ShiftExperiencesRelation> ShiftExperiencesRelations { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
@@ -31,7 +39,14 @@ namespace M_Core.Data
 
             //     builder.Entity<ApplicationUser> ()
             //    .HasMany (s => s.Groups);
+            builder.Entity<ShiftExperiencesRelation>()
+            .HasKey(c => new { c.ExperienceId, c.ShiftId });
 
+            builder.Entity<Experience>()
+             .HasMany (s => s.Shifts);
+
+            builder.Entity<Shift>()
+             .HasMany(s => s.Experiences);
         }
     }
 }

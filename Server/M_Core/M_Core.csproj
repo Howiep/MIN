@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,20 +26,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\M_Data\M_Data.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Migrations\20180425203507_init.cs" />
-    <Compile Remove="Migrations\20180512134911_SeederAdded.Designer.cs" />
-    <Compile Remove="Migrations\20180512141949_DeletedUnique.Designer.cs" />
-    <Compile Remove="Migrations\20180512141949_DeletedUnique.cs" />
-    <Compile Remove="Migrations\20180520121950_WorkAndGroup.Designer.cs" />
-    <Compile Remove="Migrations\20180520121950_WorkAndGroup.cs" />
-    <Compile Remove="Migrations\20180523214208_UpdatedWatchesAndGroupsWithSeed.Designer.cs" />
-    <Compile Remove="Migrations\20180523214208_UpdatedWatchesAndGroupsWithSeed.cs" />
-    <Compile Remove="Migrations\20180524072359_ChangedShift.Designer.cs" />
-    <Compile Remove="Migrations\20180524072359_ChangedShift.cs" />
-    <Compile Remove="Migrations\20180524072643_changednames.Designer.cs" />
-    <Compile Remove="Migrations\20180524072643_changednames.cs" />
-    <Compile Remove="Migrations\DataContextModelSnapshot.cs" />
   </ItemGroup>
 </Project>

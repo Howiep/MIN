@@ -35,6 +35,8 @@ namespace M_Core.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<int?>("LocationId");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -60,6 +62,8 @@ namespace M_Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LocationId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -83,17 +87,21 @@ namespace M_Core.Migrations
 
                     b.Property<int>("ExperienceCategoryId");
 
-                    b.Property<int?>("ExperienceGroupId");
+                    b.Property<int>("ExperienceGroupId");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Semester");
+
+                    b.Property<int?>("ShiftId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ExperienceCategoryId");
 
                     b.HasIndex("ExperienceGroupId");
+
+                    b.HasIndex("ShiftId");
 
                     b.ToTable("Experiences");
                 });
@@ -122,6 +130,83 @@ namespace M_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ExperienceGroups");
+                });
+
+            modelBuilder.Entity("M_Data.Models.InternshipLocation.Child", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("BirthDay");
+
+                    b.Property<bool>("Gender");
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("ShiftId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ShiftId");
+
+                    b.ToTable("Children");
+                });
+
+            modelBuilder.Entity("M_Data.Models.InternshipLocation.InternshipLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InternShipLocations");
+                });
+
+            modelBuilder.Entity("M_Data.Models.Shift.Shift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<int?>("ExperienceId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Note");
+
+                    b.Property<DateTime>("Start");
+
+                    b.Property<string>("StudentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExperienceId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Shifts");
+                });
+
+            modelBuilder.Entity("M_Data.Models.Shift.ShiftExperiencesRelation", b =>
+                {
+                    b.Property<int>("ExperienceId");
+
+                    b.Property<int>("ShiftId");
+
+                    b.HasKey("ExperienceId", "ShiftId");
+
+                    b.HasIndex("ShiftId");
+
+                    b.ToTable("ShiftExperiencesRelations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -231,16 +316,63 @@ namespace M_Core.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("M_Data.models.ApplicationUser", b =>
+                {
+                    b.HasOne("M_Data.Models.InternshipLocation.InternshipLocation", "Location")
+                        .WithMany("Student")
+                        .HasForeignKey("LocationId");
+                });
+
             modelBuilder.Entity("M_Data.models.Experience", b =>
                 {
                     b.HasOne("M_Data.models.ExperienceCategory", "ExperienceCategory")
-                        .WithMany()
+                        .WithMany("Experiences")
                         .HasForeignKey("ExperienceCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("M_Data.models.ExperienceGroup", "ExperienceGroup")
+                        .WithMany("Experiences")
+                        .HasForeignKey("ExperienceGroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("M_Data.Models.Shift.Shift")
+                        .WithMany("Experiences")
+                        .HasForeignKey("ShiftId");
+                });
+
+            modelBuilder.Entity("M_Data.Models.InternshipLocation.Child", b =>
+                {
+                    b.HasOne("M_Data.Models.InternshipLocation.InternshipLocation", "Location")
+                        .WithMany("Children")
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("M_Data.Models.Shift.Shift", "Shift")
+                        .WithMany("Children")
+                        .HasForeignKey("ShiftId");
+                });
+
+            modelBuilder.Entity("M_Data.Models.Shift.Shift", b =>
+                {
+                    b.HasOne("M_Data.models.Experience")
+                        .WithMany("Shifts")
+                        .HasForeignKey("ExperienceId");
+
+                    b.HasOne("M_Data.models.ApplicationUser", "Student")
+                        .WithMany("Shifts")
+                        .HasForeignKey("StudentId");
+                });
+
+            modelBuilder.Entity("M_Data.Models.Shift.ShiftExperiencesRelation", b =>
+                {
+                    b.HasOne("M_Data.models.Experience", "Experience")
                         .WithMany()
-                        .HasForeignKey("ExperienceGroupId");
+                        .HasForeignKey("ExperienceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("M_Data.Models.Shift.Shift", "Shift")
+                        .WithMany()
+                        .HasForeignKey("ShiftId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
