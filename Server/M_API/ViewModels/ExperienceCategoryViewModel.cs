@@ -9,7 +9,7 @@ namespace M_API.ViewModels
     public class ExperienceCategoryViewModel
     {
         public int Semester { get; set; }
+        public int EUCount { get; set; }
         public string Name { get; set; }
-        public List<string> Experiences { get; set; }
     }
 }

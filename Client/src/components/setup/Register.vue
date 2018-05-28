@@ -25,7 +25,7 @@
                 <div class="frmValidation" :class="{'frmValidation--passed' :has_lowercase }">
                       <v-icon v-if="has_lowercase">check_circle</v-icon>
                   Små bogstaver
-                  </div>
+                   </div>
                 <div class="frmValidation" :class="{'frmValidation--passed' :has_number }">
                       <v-icon v-if="has_number">check_circle</v-icon>
                   Tal
@@ -33,6 +33,9 @@
               </div>
               <v-btn block large :loading="loading" :disabled="loading" color="accent" @click.native="register" >
                               Opret bruger
+              </v-btn>
+               <v-btn block :loading="loading" :disabled="loading" color="primary" flat to="login" >
+                              login
               </v-btn>
             </v-form>
           </v-card-text>

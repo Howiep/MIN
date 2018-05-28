@@ -41,7 +41,8 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      beforeEnter: ifLoggedIn
     },
 
     // Auth
@@ -54,33 +55,38 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      beforeEnter: ifNotLoggedIn
     },
 
     // Intro
     {
       path: '/landing',
       name: 'landing',
-      component: LandingPage
+      component: LandingPage,
+      beforeEnter: ifNotLoggedIn
     },
     {
       path: '/intro',
       name: 'intro',
-      component: IntroPage
+      component: IntroPage,
+      beforeEnter: ifLoggedIn
     },
 
     // Experience
     {
       path: '/experiences',
       name: 'experiences',
-      component: ExperiencesPage
+      component: ExperiencesPage,
+      beforeEnter: ifLoggedIn
     },
 
     // Feed
     {
       path: '/feed',
       name: 'feed',
-      component: FeedPage
+      component: FeedPage,
+      beforeEnter: ifLoggedIn
     },
 
     // User

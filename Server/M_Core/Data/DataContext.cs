@@ -1,4 +1,5 @@
 ﻿using M_Data.models;
+using M_Data.Models;
 using M_Data.Models.InternshipLocation;
 using M_Data.Models.Shift;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -17,7 +18,9 @@ namespace M_Core.Data
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<ExperienceCategory> ExperienceCategories { get; set; }
         public DbSet<ExperienceGroup> ExperienceGroups { get; set; }
-        
+        public DbSet<ExperienceGroupRelation> ExperienceGroupRelations { get; set; }
+
+
         public DbSet<InternshipLocation> InternShipLocations { get; set; }
         public DbSet<Child> Children { get; set; }
 
@@ -42,15 +45,18 @@ namespace M_Core.Data
             builder.Entity<ShiftExperiencesRelation>()
             .HasKey(c => new { c.ExperienceId, c.ShiftId });
 
-            builder.Entity<ExperienceGroup>()
-                   .HasMany(g => g.Experiences)
-                   .WithOne(s => s.ExperienceGroup)
-                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<ExperienceGroupRelation>()
+            .HasKey(c => new { c.ExperienceId, c.ExperienceGroupId });
+
+            //builder.Entity<ExperienceGroup>()
+            //       .HasMany(g => g.Experiences)
+            //       .WithOne(s => s.ExperienceGroup)
+            //       .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<ExperienceCategory>()
                    .HasMany(g => g.Experiences)
                    .WithOne(s => s.ExperienceCategory)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.SetNull);
 
             //builder.Entity<Experience>()
             //       .HasOne(s => s.ExperienceCategory)

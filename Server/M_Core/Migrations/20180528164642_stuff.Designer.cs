@@ -11,8 +11,8 @@ using System;
 namespace M_Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180527224252_stuff3")]
-    partial class stuff3
+    [Migration("20180528164642_stuff")]
+    partial class stuff
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,9 +86,7 @@ namespace M_Core.Migrations
 
                     b.Property<int>("EUCount");
 
-                    b.Property<int>("ExperienceCategoryId");
-
-                    b.Property<int>("ExperienceGroupId");
+                    b.Property<int?>("ExperienceCategoryId");
 
                     b.Property<string>("Name");
 
@@ -97,8 +95,6 @@ namespace M_Core.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ExperienceCategoryId");
-
-                    b.HasIndex("ExperienceGroupId");
 
                     b.ToTable("Experiences");
                 });
@@ -127,6 +123,19 @@ namespace M_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ExperienceGroups");
+                });
+
+            modelBuilder.Entity("M_Data.Models.ExperienceGroupRelation", b =>
+                {
+                    b.Property<int>("ExperienceId");
+
+                    b.Property<int>("ExperienceGroupId");
+
+                    b.HasKey("ExperienceId", "ExperienceGroupId");
+
+                    b.HasAlternateKey("ExperienceGroupId", "ExperienceId");
+
+                    b.ToTable("ExperienceGroupRelations");
                 });
 
             modelBuilder.Entity("M_Data.Models.InternshipLocation.Child", b =>
@@ -321,12 +330,20 @@ namespace M_Core.Migrations
                     b.HasOne("M_Data.models.ExperienceCategory", "ExperienceCategory")
                         .WithMany("Experiences")
                         .HasForeignKey("ExperienceCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
 
+            modelBuilder.Entity("M_Data.Models.ExperienceGroupRelation", b =>
+                {
                     b.HasOne("M_Data.models.ExperienceGroup", "ExperienceGroup")
-                        .WithMany("Experiences")
+                        .WithMany("GroupExperiences")
                         .HasForeignKey("ExperienceGroupId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("M_Data.models.Experience", "Experience")
+                        .WithMany("ExperienceGroups")
+                        .HasForeignKey("ExperienceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("M_Data.Models.InternshipLocation.Child", b =>

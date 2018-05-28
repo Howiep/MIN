@@ -8,6 +8,7 @@
       <v-stepper-step step="3">Noter<small>Valgfrit</small></v-stepper-step>
     </v-stepper-header>
     <v-stepper-items class="stepperCard">
+
       <v-stepper-content step="1">
         <choose-date v-on:setDate="setDate"></choose-date>
         <p v-if="entry.dateFormatted">Du har valgt: {{ entry.dateFormatted }}</p>
@@ -31,6 +32,7 @@
         <v-btn color="primary" block @click="closeMenu()">indsæt vagt</v-btn>
         <v-btn flat block @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
+
     </v-stepper-items>
   </v-stepper>
 </template>

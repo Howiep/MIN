@@ -1,15 +1,14 @@
-﻿using M_Data.Models;
-using M_Data.Models.InternshipLocation;
+﻿using M_Data.models;
+using M_Data.Models;
 using M_Data.Models.Shift;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace M_Data.models
+namespace M_API.ViewModels
 {
-    public class Experience
+    public class ExperienceViewModel 
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,4 +20,4 @@ namespace M_Data.models
         public IList<ExperienceGroupRelation> ExperienceGroups { get; set; }
         public IList<ShiftExperiencesRelation> ShiftExperiences { get; set; }
     }
-} 
+}

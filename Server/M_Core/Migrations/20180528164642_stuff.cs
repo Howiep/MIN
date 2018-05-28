@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace M_Core.Migrations
 {
-    public partial class stuff3 : Migration
+    public partial class stuff : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -93,8 +93,7 @@ namespace M_Core.Migrations
                     Desc = table.Column<string>(nullable: true),
                     EU = table.Column<bool>(nullable: false),
                     EUCount = table.Column<int>(nullable: false),
-                    ExperienceCategoryId = table.Column<int>(nullable: false),
-                    ExperienceGroupId = table.Column<int>(nullable: false),
+                    ExperienceCategoryId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Semester = table.Column<int>(nullable: false)
                 },
@@ -106,13 +105,7 @@ namespace M_Core.Migrations
                         column: x => x.ExperienceCategoryId,
                         principalTable: "ExperienceCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Experiences_ExperienceGroups_ExperienceGroupId",
-                        column: x => x.ExperienceGroupId,
-                        principalTable: "ExperienceGroups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,6 +138,31 @@ namespace M_Core.Migrations
                         principalTable: "InternShipLocations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExperienceGroupRelations",
+                columns: table => new
+                {
+                    ExperienceId = table.Column<int>(nullable: false),
+                    ExperienceGroupId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExperienceGroupRelations", x => new { x.ExperienceId, x.ExperienceGroupId });
+                    table.UniqueConstraint("AK_ExperienceGroupRelations_ExperienceGroupId_ExperienceId", x => new { x.ExperienceGroupId, x.ExperienceId });
+                    table.ForeignKey(
+                        name: "FK_ExperienceGroupRelations_ExperienceGroups_ExperienceGroupId",
+                        column: x => x.ExperienceGroupId,
+                        principalTable: "ExperienceGroups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExperienceGroupRelations_Experiences_ExperienceId",
+                        column: x => x.ExperienceId,
+                        principalTable: "Experiences",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -367,11 +385,6 @@ namespace M_Core.Migrations
                 column: "ExperienceCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Experiences_ExperienceGroupId",
-                table: "Experiences",
-                column: "ExperienceGroupId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ShiftExperiencesRelations_ShiftId",
                 table: "ShiftExperiencesRelations",
                 column: "ShiftId");
@@ -403,10 +416,16 @@ namespace M_Core.Migrations
                 name: "Children");
 
             migrationBuilder.DropTable(
+                name: "ExperienceGroupRelations");
+
+            migrationBuilder.DropTable(
                 name: "ShiftExperiencesRelations");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "ExperienceGroups");
 
             migrationBuilder.DropTable(
                 name: "Experiences");
@@ -416,9 +435,6 @@ namespace M_Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExperienceCategories");
-
-            migrationBuilder.DropTable(
-                name: "ExperienceGroups");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

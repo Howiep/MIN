@@ -1,35 +1,41 @@
 <template>
- <v-layout>
-   <v-flex>
-     <panel title="Login">
-       <br>
-         <form name="tab-tracker-form" autocomplete="off">
-            <v-text-field name="email" label="Email" v-model="email"></v-text-field>
-            <v-text-field type="password" name="password" label="Password" v-model="password"></v-text-field>
-          </form>
-          <br>
-          <br>
-          <div>
-            <v-btn :loading="loading" :disabled="loading" color="primary" @click.native="login" >
-              Login
-            </v-btn>
-          </div>
-          <v-snackbar
-            :timeout="timeout"
-            :color="snackColor"
-            multi-line
-            v-model="snackbar" >
-            {{ message }}
-            <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
-          </v-snackbar>
-     </panel>
-   </v-flex>
- </v-layout>
+ <v-container xs-fluid>
+   <v-layout>
+     <v-flex>
+      <div>
+        <v-toolbar color="transparent" flat>
+            <v-toolbar-title>
+             Login
+            </v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form name="tab-tracker-form" autocomplete="off" v-model="valid">
+              <v-text-field required  name="email" label="Email" v-model="email"></v-text-field>
+              <v-text-field required class="frmField" autocomplete="new-password" type="password" name="password" label="Password"  v-model="password"></v-text-field>
+              <v-btn block large :loading="loading" :disabled="loading" color="accent" @click.native="login" >
+                      Login
+              </v-btn>
+              <v-btn block :loading="loading" :disabled="loading" color="primary" flat to="register" >
+                              Opret bruger
+              </v-btn>
+            </v-form>
+          </v-card-text>
+      </div>
+    </v-flex>
+   </v-layout>
+    <v-snackbar
+              :timeout="timeout"
+              :color="snackColor"
+              multi-line
+              v-model="snackbar" >
+              {{ message }}
+              <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
+    </v-snackbar>
+ </v-container>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import Panel from '@/components/shared/Panel'
 
 export default {
   name: 'login',
@@ -68,7 +74,6 @@ export default {
     }
   },
   components: {
-    Panel
   }
 }
 </script>
