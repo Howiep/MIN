@@ -32,6 +32,12 @@ export default new Vuex.Store({
       state.snackContent.timeout = snackContent.timeout
       state.snackContent.snackColor = snackContent.snackColor
       state.snackContent.message = snackContent.message
+    },
+    resetSnackbar (state, snackContent) {
+      state.snackContent.snackbarStatus = false
+      state.snackContent.timeout = null
+      state.snackContent.snackColor = null
+      state.snackContent.message = null
     }
   },
   actions: {
@@ -40,6 +46,9 @@ export default new Vuex.Store({
     },
     toggleSnackbar ({commit}, snackContent) {
       commit('toggleSnackbar', snackContent)
+      setTimeout(() => {
+        commit('resetSnackbar', snackContent)
+      }, snackContent.timeout)
     }
   },
   getters: {
