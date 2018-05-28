@@ -93,15 +93,11 @@ namespace M_Core.Migrations
 
                     b.Property<int>("Semester");
 
-                    b.Property<int?>("ShiftId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExperienceCategoryId");
 
                     b.HasIndex("ExperienceGroupId");
-
-                    b.HasIndex("ShiftId");
 
                     b.ToTable("Experiences");
                 });
@@ -177,8 +173,6 @@ namespace M_Core.Migrations
 
                     b.Property<DateTime>("End");
 
-                    b.Property<int?>("ExperienceId");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("Note");
@@ -188,8 +182,6 @@ namespace M_Core.Migrations
                     b.Property<string>("StudentId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExperienceId");
 
                     b.HasIndex("StudentId");
 
@@ -328,16 +320,12 @@ namespace M_Core.Migrations
                     b.HasOne("M_Data.models.ExperienceCategory", "ExperienceCategory")
                         .WithMany("Experiences")
                         .HasForeignKey("ExperienceCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("M_Data.models.ExperienceGroup", "ExperienceGroup")
                         .WithMany("Experiences")
                         .HasForeignKey("ExperienceGroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("M_Data.Models.Shift.Shift")
-                        .WithMany("Experiences")
-                        .HasForeignKey("ShiftId");
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("M_Data.Models.InternshipLocation.Child", b =>
@@ -353,10 +341,6 @@ namespace M_Core.Migrations
 
             modelBuilder.Entity("M_Data.Models.Shift.Shift", b =>
                 {
-                    b.HasOne("M_Data.models.Experience")
-                        .WithMany("Shifts")
-                        .HasForeignKey("ExperienceId");
-
                     b.HasOne("M_Data.models.ApplicationUser", "Student")
                         .WithMany("Shifts")
                         .HasForeignKey("StudentId");
@@ -365,12 +349,12 @@ namespace M_Core.Migrations
             modelBuilder.Entity("M_Data.Models.Shift.ShiftExperiencesRelation", b =>
                 {
                     b.HasOne("M_Data.models.Experience", "Experience")
-                        .WithMany()
+                        .WithMany("ShiftExperiences")
                         .HasForeignKey("ExperienceId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("M_Data.Models.Shift.Shift", "Shift")
-                        .WithMany()
+                        .WithMany("ShiftExperiences")
                         .HasForeignKey("ShiftId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

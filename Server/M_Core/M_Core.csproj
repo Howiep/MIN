@@ -27,4 +27,15 @@
   <ItemGroup>
     <ProjectReference Include="..\M_Data\M_Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20180526234157_initial.cs" />
+    <Compile Remove="Migrations\20180527213138_stuff.cs" />
+    <Compile Remove="Migrations\20180527220303_stuff.cs" />
+    <Compile Remove="Migrations\20180527220456_stuff.cs" />
+    <Compile Remove="Migrations\20180527221732_stuff.cs" />
+    <Compile Remove="Migrations\20180527222652_stuff.cs" />
+    <Compile Remove="Migrations\20180527223054_stuff.cs" />
+    <Compile Remove="Migrations\20180527223135_stuff.cs" />
+    <Compile Remove="Migrations\20180527223317_stuff.cs" />
+  </ItemGroup>
 </Project>

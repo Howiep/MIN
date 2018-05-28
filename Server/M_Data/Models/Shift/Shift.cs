@@ -14,7 +14,7 @@ namespace M_Data.Models.Shift
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public ApplicationUser Student { get; set; }
-        public virtual ICollection<Experience> Experiences { get; set; }
+        public virtual ICollection<ShiftExperiencesRelation> ShiftExperiences { get; set; }
         public virtual ICollection<Child> Children { get; set; }
     }
 }

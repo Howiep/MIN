@@ -42,11 +42,27 @@ namespace M_Core.Data
             builder.Entity<ShiftExperiencesRelation>()
             .HasKey(c => new { c.ExperienceId, c.ShiftId });
 
-            builder.Entity<Experience>()
-             .HasMany (s => s.Shifts);
+            builder.Entity<ExperienceGroup>()
+                   .HasMany(g => g.Experiences)
+                   .WithOne(s => s.ExperienceGroup)
+                   .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Shift>()
-             .HasMany(s => s.Experiences);
+            builder.Entity<ExperienceCategory>()
+                   .HasMany(g => g.Experiences)
+                   .WithOne(s => s.ExperienceCategory)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            //builder.Entity<Experience>()
+            //       .HasOne(s => s.ExperienceCategory)
+            //       .WithMany(g => g.Experiences)
+            //       .HasForeignKey(s => s.ExperienceCategoryId)
+            //       .OnDelete(DeleteBehavior.SetNull);
+
+            //builder.Entity<Experience>()
+                   //.HasOne(s => s.ExperienceGroup)
+                   //.WithMany(g => g.Experiences)
+                   //.HasForeignKey(s => s.ExperienceGroupId)
+                   //.OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

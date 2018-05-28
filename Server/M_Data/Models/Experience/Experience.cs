@@ -22,6 +22,6 @@ namespace M_Data.models
         [ForeignKey("ExperienceGroup")]
         public int ExperienceGroupId { get; set; }
         public ExperienceGroup ExperienceGroup { get; set; }
-        public virtual ICollection<Shift> Shifts { get; set; }
+        public IList<ShiftExperiencesRelation> ShiftExperiences { get; set; }
     }
 } 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace M_Core.Migrations
 {
-    public partial class initial : Migration
+    public partial class stuff3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,6 +82,37 @@ namespace M_Core.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Experiences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Desc = table.Column<string>(nullable: true),
+                    EU = table.Column<bool>(nullable: false),
+                    EUCount = table.Column<int>(nullable: false),
+                    ExperienceCategoryId = table.Column<int>(nullable: false),
+                    ExperienceGroupId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Semester = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Experiences", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Experiences_ExperienceCategories_ExperienceCategoryId",
+                        column: x => x.ExperienceCategoryId,
+                        principalTable: "ExperienceCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Experiences_ExperienceGroups_ExperienceGroupId",
+                        column: x => x.ExperienceGroupId,
+                        principalTable: "ExperienceGroups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,7 +239,6 @@ namespace M_Core.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     End = table.Column<DateTime>(nullable: false),
-                    ExperienceId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Note = table.Column<string>(nullable: true),
                     Start = table.Column<DateTime>(nullable: false),
@@ -249,44 +279,6 @@ namespace M_Core.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Children_Shifts_ShiftId",
-                        column: x => x.ShiftId,
-                        principalTable: "Shifts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Experiences",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Desc = table.Column<string>(nullable: true),
-                    EU = table.Column<bool>(nullable: false),
-                    EUCount = table.Column<int>(nullable: false),
-                    ExperienceCategoryId = table.Column<int>(nullable: false),
-                    ExperienceGroupId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Semester = table.Column<int>(nullable: false),
-                    ShiftId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Experiences", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Experiences_ExperienceCategories_ExperienceCategoryId",
-                        column: x => x.ExperienceCategoryId,
-                        principalTable: "ExperienceCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Experiences_ExperienceGroups_ExperienceGroupId",
-                        column: x => x.ExperienceGroupId,
-                        principalTable: "ExperienceGroups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Experiences_Shifts_ShiftId",
                         column: x => x.ShiftId,
                         principalTable: "Shifts",
                         principalColumn: "Id",
@@ -380,44 +372,18 @@ namespace M_Core.Migrations
                 column: "ExperienceGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Experiences_ShiftId",
-                table: "Experiences",
-                column: "ShiftId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ShiftExperiencesRelations_ShiftId",
                 table: "ShiftExperiencesRelations",
                 column: "ShiftId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_ExperienceId",
-                table: "Shifts",
-                column: "ExperienceId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Shifts_StudentId",
                 table: "Shifts",
                 column: "StudentId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Shifts_Experiences_ExperienceId",
-                table: "Shifts",
-                column: "ExperienceId",
-                principalTable: "Experiences",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Shifts_AspNetUsers_StudentId",
-                table: "Shifts");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Experiences_Shifts_ShiftId",
-                table: "Experiences");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -443,22 +409,22 @@ namespace M_Core.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "InternShipLocations");
+                name: "Experiences");
 
             migrationBuilder.DropTable(
                 name: "Shifts");
-
-            migrationBuilder.DropTable(
-                name: "Experiences");
 
             migrationBuilder.DropTable(
                 name: "ExperienceCategories");
 
             migrationBuilder.DropTable(
                 name: "ExperienceGroups");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "InternShipLocations");
         }
     }
 }
