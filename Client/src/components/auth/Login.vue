@@ -50,6 +50,7 @@ export default {
         this.$store.dispatch('toggleSnackbar', { message: 'Succes! Du er logget ind', snackColor: 'accent', snackbarStatus: true, timeout: 2500, })
         this.loading = false
       } catch (error) {
+        //console.log(error)
         this.loading = false
       }
       this.$router.push({ path: 'home' })

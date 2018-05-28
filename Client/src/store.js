@@ -32,10 +32,6 @@ export default new Vuex.Store({
       state.snackContent.timeout = snackContent.timeout
       state.snackContent.snackColor = snackContent.snackColor
       state.snackContent.message = snackContent.message
-      this.resetSnackbar()
-    },
-    resetSnackbar (state) {
-      setInterval(state.snackContent.snackbarStatus = false, state.snackContent.timeout)
     }
   },
   actions: {
