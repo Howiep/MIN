@@ -14,6 +14,7 @@ namespace M_Core.Auth {
     public class JwtPacket {
         public string Token { get; set; }
         public string UserName { get; set; }
+        public string UserId { get; set; }
         public string Error { get; set; }
 
         public static JwtPacket CreateJwtPacket (ApplicationUser user) {
@@ -28,7 +29,7 @@ namespace M_Core.Auth {
 
             //gives us the encoded token as a string
             var encodedJwt = new JwtSecurityTokenHandler ().WriteToken (jwt);
-            return new JwtPacket () { Token = encodedJwt, UserName = user.Email };
+            return new JwtPacket () { Token = encodedJwt, UserName = user.Email, UserId = user.Id };
 
         }
     }

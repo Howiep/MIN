@@ -7,30 +7,51 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   state: {
-    token: null,
-    user: null,
-    isLoggedIn: null
+    isLoggedIn: null,
+    user: {
+      token: null,
+      userId: null,
+      userName: null
+    },
+    snackContent: {
+      snackbarStatus: null,
+      timeout: null,
+      snackColor: null,
+      message: null
+    }
   },
   mutations: {
-    setToken (state, token) {
-      state.token = token
-      state.isLoggedIn = !!(token)
-    },
     setUser (state, user) {
-      state.user = user
+      state.user.token = user.token
+      state.user.userId = user.userId
+      state.user.userName = user.userName
+      state.isLoggedIn = !!(user.token)
+    },
+    toggleSnackbar (state, snackContent) {
+      state.snackContent.snackbarStatus = snackContent.snackbarStatus
+      state.snackContent.timeout = snackContent.timeout
+      state.snackContent.snackColor = snackContent.snackColor
+      state.snackContent.message = snackContent.message
+      this.resetSnackbar()
+    },
+    resetSnackbar (state) {
+      setInterval(state.snackContent.snackbarStatus = false, state.snackContent.timeout)
     }
   },
   actions: {
-    setToken ({commit}, token) {
-      commit('setToken', token)
-    },
     setUser ({commit}, user) {
       commit('setUser', user)
+    },
+    toggleSnackbar ({commit}, snackContent) {
+      commit('toggleSnackbar', snackContent)
     }
   },
   getters: {
     isLoggedIn (state) {
       return state.isLoggedIn
+    },
+    snackContent (state) {
+      return state.snackContent
     }
   },
   plugins: [createPersistedState()]

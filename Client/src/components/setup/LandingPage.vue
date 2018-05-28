@@ -1,18 +1,23 @@
 <template>
-  <v-card class="hello">
-    <v-card-media src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Jordmor_jim-_oslo.jpeg/2560px-Jordmor_jim-_oslo.jpeg" height="200px">
-    </v-card-media>
-    <v-card-title>
-    <h3>{{ msg }}</h3>
-    </v-card-title>
-    <v-card-actions>
-     <v-btn class="primary" dark to="register" >Opret ny bruger</v-btn>
-    </v-card-actions>
-    <v-card-text>Har du en konto?</v-card-text>
-    <v-card-actions>
-    <v-btn class="primary" dark to="login" >Login</v-btn>
-    </v-card-actions>
-  </v-card>
+<v-container xs-fluid>
+   <v-layout>
+     <v-flex>
+         <v-card flat>
+          </v-card-media>
+          <v-card-title>
+          <h1>{{ msg }}</h1>
+          </v-card-title>
+          <v-card-text>Velkommen til IN</v-card-text>
+          <v-card-actions>
+          <v-btn block large class="primary" dark to="register" >Opret ny bruger</v-btn>
+          </v-card-actions>
+          <v-card-actions>
+          <v-btn block large class="accent" dark to="login" >Login</v-btn>
+          </v-card-actions>
+        </v-card>
+    </v-flex>
+   </v-layout>
+</v-container>
 </template>
 
 <script>
@@ -27,6 +32,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+<style scoped>
+.application .theme--light.card, .theme--light .card{
+  background-color: transparent;
+}
 </style>

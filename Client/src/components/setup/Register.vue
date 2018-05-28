@@ -42,14 +42,6 @@
       </div>
     </v-flex>
    </v-layout>
-    <v-snackbar
-              :timeout="timeout"
-              :color="snackColor"
-              multi-line
-              v-model="snackbar" >
-              {{ message }}
-              <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
-    </v-snackbar>
  </v-container>
 </template>
 
@@ -64,10 +56,6 @@ export default {
       email: '',
       password: '',
       loading: false,
-      message: null,
-      snackbar: false,
-      timeout: 3000,
-      snackColor: 'primary',
       emailRules:
       [
         v => !!v || 'E-mail is required',
@@ -86,19 +74,14 @@ export default {
           email: this.email,
           password: this.password
         })
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setUser', response.data)
+        this.$store.dispatch('toggleSnackbar', { message: 'Succes! Du er logget ind', snackColor: 'accent', snackbarStatus: true, timeout: 2500, })
         this.loading = false
-        this.snackbar = true
-        this.snackColor = 'accent'
-        this.message = 'success: du er logget ind'
       } catch (error) {
         console.log(error)
         this.loading = false
-        this.snackbar = true
-        this.snackColor = 'red'
-        this.message = 'Der skete en fejl'
       }
+      this.$router.push({ path: 'home' })
     },
     password_check: function () {
       this.has_number = /\d/.test(this.password)
