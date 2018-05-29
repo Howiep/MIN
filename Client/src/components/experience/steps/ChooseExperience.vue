@@ -3,16 +3,25 @@
   <v-toolbar color="transparent" flat tabs>
     <v-text-field v-model="search" append-icon="search" label="Søg" solo-inverted flat></v-text-field>
     <v-tabs v-if="!search" fixed-tabs v-model="currentItem" color="transparent" slider-color="accent" slot="extension">
-      <v-tab v-for="category in categories" :key="category.id" :href="'#tab-' + item.id">
-        {{ category.name }}
+      <v-tab v-for="item in categories" :key="item.id" :href="'#tab-' + item.id">
+        {{ item.name }}
       </v-tab>
     </v-tabs>
   </v-toolbar>
   <v-tabs-items v-model="currentItem" class="actionList">
-    <v-tab-item v-for="item in experienceList" :key="item.id" :id="'tab-' + item.id">
+    <v-tab-item v-for="item in categories" :key="item.id" :id="'tab-' + item.id">
 
       <v-card v-if="!search" class="scroll-y chooseList">
-        <v-list>
+        <v-list three-line subheader>
+          <v-subheader>{{ item.name }}</v-subheader>
+          <v-list-tile v-for="item in experiences" :key="item.id">
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+              <v-list-tile-sub-title>Set the content filtering level to restrict appts that can be downloaded</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+        <!-- <v-list>
           <v-list-group
             v-for="group in item.groups"
             v-model="group.active"
@@ -39,7 +48,7 @@
             </v-list-tile>
           </v-list-group>
 
-        </v-list>
+        </v-list> -->
       </v-card>
 
       <v-card v-if="search" class="scroll-y chooseList">
@@ -70,7 +79,7 @@ export default {
       search: '',
       actions: new Set(), // using Set() is ES6, automatically makes sure there are only unique values
       selected: [],
-      experienceList: new Set(),
+      experiences: new Set(),
       categories: [],
       currentItem: 'tab-0'
     }
@@ -78,19 +87,12 @@ export default {
   async mounted () {
     try {
       const experiences = await ExperienceService.get()
-      this.experienceList = experiences.data
-
       const categoryList = await ExperienceService.getCategories()
-      categoryList.data.forEach(category => {
-        this.categories.add(category)
-      })
-      console.log(this.categories)
-
       const actionsList = await ExperienceService.getActions()
-      actionsList.data.forEach(action => {
-        this.actionsList.add(action)
-      })
-      this.actionsList = actionsList.data
+
+      this.experiences = experiences.data
+      this.categories = categoryList.data
+      this.actions = actionsList.data
 
     } catch (error) {
       // this.message = error.response.data.error
@@ -115,10 +117,16 @@ export default {
     }
   },
   computed: {
+    currentTabItems () {
+      const array = Array.from(this.experiences)
+      return array.filter(action => {
+        return experiences.experienceCategory.id.filter(l => l.id === this.currentItem.split(0,3))
+      })
+    },
     filteredList () {
       const array = Array.from(this.actions)
       return array.filter(action => {
-        return action.toLowerCase().includes(this.search.toLowerCase())
+        return action.name.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   }

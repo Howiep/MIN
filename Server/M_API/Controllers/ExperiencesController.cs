@@ -52,6 +52,7 @@ namespace M_API.Controllers
         public IQueryable<ExperienceCategory> GetCategories()
         {
             var experienceCategories = _context.ExperienceCategories
+                .Where(e => e.Experiences.Any())
                 .Select(e => new ExperienceCategory
                 {
                     Id = e.Id,

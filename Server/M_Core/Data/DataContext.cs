@@ -42,33 +42,18 @@ namespace M_Core.Data
 
             //     builder.Entity<ApplicationUser> ()
             //    .HasMany (s => s.Groups);
+
             builder.Entity<ShiftExperiencesRelation>()
             .HasKey(c => new { c.ExperienceId, c.ShiftId });
 
             builder.Entity<ExperienceGroupRelation>()
             .HasKey(c => new { c.ExperienceId, c.ExperienceGroupId });
 
-            //builder.Entity<ExperienceGroup>()
-            //       .HasMany(g => g.Experiences)
-            //       .WithOne(s => s.ExperienceGroup)
-            //       .OnDelete(DeleteBehavior.SetNull);
-
             builder.Entity<ExperienceCategory>()
                    .HasMany(g => g.Experiences)
                    .WithOne(s => s.ExperienceCategory)
                    .OnDelete(DeleteBehavior.SetNull);
 
-            //builder.Entity<Experience>()
-            //       .HasOne(s => s.ExperienceCategory)
-            //       .WithMany(g => g.Experiences)
-            //       .HasForeignKey(s => s.ExperienceCategoryId)
-            //       .OnDelete(DeleteBehavior.SetNull);
-
-            //builder.Entity<Experience>()
-                   //.HasOne(s => s.ExperienceGroup)
-                   //.WithMany(g => g.Experiences)
-                   //.HasForeignKey(s => s.ExperienceGroupId)
-                   //.OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
