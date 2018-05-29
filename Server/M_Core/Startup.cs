@@ -33,7 +33,7 @@ namespace M_Core
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQL2")));
+            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQL")));
 
             //services.AddTransient<IEmailSender, EmailSender>();
 

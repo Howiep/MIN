@@ -27,4 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\M_Data\M_Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20180528164642_stuff.cs" />
+  </ItemGroup>
 </Project>

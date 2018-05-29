@@ -34,35 +34,46 @@ namespace M_API.Controllers
                     Desc = e.Desc,
                     Semester = e.Semester,
                     EUCount = e.EUCount,
-                    ExperienceCategory  =  e.ExperienceCategory
+                    ExperienceCategory = new ExperienceCategoryViewModel
+                    {
+                        Id = e.ExperienceCategory.Id,
+                        Name = e.ExperienceCategory.Name,
+                        EUCount = e.ExperienceCategory.EUCount
+
+                    },
+                    ExperienceGroups = e.ExperienceGroups
                 });
 
             return experiences;
         }
 
-        // GET: api/Experiences/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/Experiences/categories
+        [HttpGet("categories")]
+        public IQueryable<ExperienceCategory> GetCategories()
         {
-            return "value";
+            var experienceCategories = _context.ExperienceCategories
+                .Select(e => new ExperienceCategory
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    EUCount = e.EUCount
+                });
+
+            return experienceCategories;
         }
 
-        // POST: api/Experiences
-        [HttpPost]
-        public void Post([FromBody]string value)
+        // GET: api/Experiences/actions
+        [HttpGet("actions")]
+        public IQueryable<Experience> GetActions()
         {
-        }
+            var actions = _context.Experiences
+                .Select(e => new Experience
+                {
+                    Id = e.Id,
+                    Name = e.Name
+                });
 
-        // PUT: api/Experiences/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return actions;
         }
     }
 }

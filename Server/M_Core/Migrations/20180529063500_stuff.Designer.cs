@@ -11,7 +11,7 @@ using System;
 namespace M_Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180528164642_stuff")]
+    [Migration("20180529063500_stuff")]
     partial class stuff
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

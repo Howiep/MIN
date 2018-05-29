@@ -3,8 +3,8 @@
   <v-toolbar color="transparent" flat tabs>
     <v-text-field v-model="search" append-icon="search" label="Søg" solo-inverted flat></v-text-field>
     <v-tabs v-if="!search" fixed-tabs v-model="currentItem" color="transparent" slider-color="accent" slot="extension">
-      <v-tab v-for="item in experienceList" :key="item.id" :href="'#tab-' + item.id">
-        {{ item.name }}
+      <v-tab v-for="category in categories" :key="category.id" :href="'#tab-' + item.id">
+        {{ category.name }}
       </v-tab>
     </v-tabs>
   </v-toolbar>
@@ -40,18 +40,6 @@
           </v-list-group>
 
         </v-list>
-
-        <!-- <div v-for="group in item.groups" :key="group.index">
-          <v-list-tile ripple @click="toggle(action)" v-for="action in group.actions" :key="action.index" avatar>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ action }}</v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
-              <v-icon color="grey lighten-1" v-if="selected.indexOf(action) < 0">check_box_outline_blank</v-icon>
-              <v-icon color="underline" v-else>check_box</v-icon>
-            </v-list-tile-action>
-        </v-list-tile>
-        </div> -->
       </v-card>
 
       <v-card v-if="search" class="scroll-y chooseList">
@@ -82,23 +70,28 @@ export default {
       search: '',
       actions: new Set(), // using Set() is ES6, automatically makes sure there are only unique values
       selected: [],
-      experienceList: [],
+      experienceList: new Set(),
+      categories: [],
       currentItem: 'tab-0'
     }
   },
   async mounted () {
     try {
-      const res = await ExperienceService.getCategories()
-      this.experienceList = res
+      const experiences = await ExperienceService.get()
+      this.experienceList = experiences.data
 
-      // extract actions from categories
-      res.forEach(experienceList => {
-        experienceList.groups.forEach(groups => {
-            groups.actions.forEach(actions => {
-            this.actions.add(actions)
-          })
-        })
+      const categoryList = await ExperienceService.getCategories()
+      categoryList.data.forEach(category => {
+        this.categories.add(category)
       })
+      console.log(this.categories)
+
+      const actionsList = await ExperienceService.getActions()
+      actionsList.data.forEach(action => {
+        this.actionsList.add(action)
+      })
+      this.actionsList = actionsList.data
+
     } catch (error) {
       // this.message = error.response.data.error
     }

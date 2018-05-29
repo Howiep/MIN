@@ -16,7 +16,7 @@ namespace M_API.ViewModels
         public bool EU { get; set; }
         public int EUCount { get; set; }
         public int Semester { get; set; }
-        public ExperienceCategory ExperienceCategory { get; set; }
+        public ExperienceCategoryViewModel ExperienceCategory { get; set; }
         public IList<ExperienceGroupRelation> ExperienceGroups { get; set; }
         public IList<ShiftExperiencesRelation> ShiftExperiences { get; set; }
     }
