@@ -47,6 +47,21 @@ namespace M_API.Controllers
             return experiences;
         }
 
+        //// GET: api/Experiences/groups
+        //[HttpGet("groups")]
+        //public IQueryable<ExperienceGroup> GetGroups()
+        //{
+        //    var experienceGroups = _context.ExperienceGroups
+        //        .Select(e => new ExperienceGroup
+        //        {
+        //            Id = e.Id,
+        //            Name = e.Name,
+        //            GroupExperiences = e.GroupExperiences
+        //        });
+
+        //    return ExperienceGroups;
+        //}
+
         // GET: api/Experiences/categories
         [HttpGet("categories")]
         public IQueryable<ExperienceCategory> GetCategories()

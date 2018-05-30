@@ -14,13 +14,6 @@ export default {
     } catch (error) {
       return 'Failed to get categories'
     }
-  },
-  getActions () {
-    try {
-      return Api().get('experiences/actions')
-    } catch (error) {
-      return 'Failed to get actions'
-    }
   }
 }
 

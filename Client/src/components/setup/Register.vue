@@ -81,7 +81,7 @@ export default {
         //console.log(error)
         this.loading = false
       }
-      this.$router.push({ path: 'home' })
+      this.$router.push({ path: 'intro' })
     },
     password_check: function () {
       this.has_number = /\d/.test(this.password)

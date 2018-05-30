@@ -7,7 +7,7 @@
           <v-card-title>
           <h1>{{ msg }}</h1>
           </v-card-title>
-          <v-card-text>Velkommen til IN</v-card-text>
+          <v-card-text>Velkommen til MIN</v-card-text>
           <v-card-actions>
           <v-btn block large class="primary" dark to="register" >Opret ny bruger</v-btn>
           </v-card-actions>
