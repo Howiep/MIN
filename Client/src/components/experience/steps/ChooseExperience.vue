@@ -81,7 +81,7 @@ export default {
       selected: [],
       experiences: new Set(),
       categories: [],
-      currentItem: 'tab-0'
+      currentItem: ''
     }
   },
   async mounted () {
@@ -97,6 +97,7 @@ export default {
     } catch (error) {
       // this.message = error.response.data.error
     }
+    this.currentItem = 'tab-' + this.categories[0].id // set tab-number to first in array
   },
   methods: {
     toggle (value) {
