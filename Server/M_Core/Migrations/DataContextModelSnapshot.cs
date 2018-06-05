@@ -180,13 +180,11 @@ namespace M_Core.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("End");
+                    b.Property<DateTime>("Date");
 
                     b.Property<string>("Name");
 
                     b.Property<string>("Note");
-
-                    b.Property<DateTime>("Start");
 
                     b.Property<string>("StudentId");
 
@@ -360,7 +358,8 @@ namespace M_Core.Migrations
                 {
                     b.HasOne("M_Data.models.ApplicationUser", "Student")
                         .WithMany("Shifts")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("M_Data.Models.Shift.ShiftExperiencesRelation", b =>

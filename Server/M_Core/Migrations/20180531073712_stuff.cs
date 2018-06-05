@@ -256,10 +256,9 @@ namespace M_Core.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    End = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Note = table.Column<string>(nullable: true),
-                    Start = table.Column<DateTime>(nullable: false),
                     StudentId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -270,7 +269,7 @@ namespace M_Core.Migrations
                         column: x => x.StudentId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(

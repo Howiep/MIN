@@ -54,6 +54,16 @@ namespace M_Core.Data
                    .WithOne(s => s.ExperienceCategory)
                    .OnDelete(DeleteBehavior.SetNull);
 
+            builder.Entity<ApplicationUser>()
+                   .HasMany(g => g.Shifts)
+                   .WithOne(s => s.Student)
+                   .OnDelete(DeleteBehavior.SetNull);
+
+            //builder.Entity<Shift>()
+                   //.HasOne(g => g.Student)
+                   //.WithMany(s => s.Shifts)
+                   //.HasForeignKey(a => a.Student)
+                   //.OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

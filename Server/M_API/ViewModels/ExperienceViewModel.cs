@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace M_API.ViewModels
 {
-    public class ExperienceViewModel 
+    public class ExperienceViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
