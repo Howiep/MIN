@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M_Core", "M_Core\M_Core.csproj", "{2AAAE04E-10A6-48CF-98C8-1FCA8DCB8367}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M_API", "M_API\M_API.csproj", "{9FB72DED-ABD2-4794-993E-D2BD79B80C10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M_Core", "M_Core\M_Core.csproj", "{2AAAE04E-10A6-48CF-98C8-1FCA8DCB8367}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M_Data", "M_Data\M_Data.csproj", "{B009D83E-4E3D-46D3-B33B-D4DAFA965C6F}"
 EndProject
