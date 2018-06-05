@@ -13,10 +13,10 @@
               <v-text-field required  name="email" label="Email" v-model="email"></v-text-field>
               <v-text-field required type="password" name="password" label="Password" v-model="password"></v-text-field>
               <v-btn block large :loading="loading" :disabled="loading" color="accent" @click.native="login" >
-                      Login
+                  Login
               </v-btn>
               <v-btn block :loading="loading" :disabled="loading" color="primary" flat to="register" >
-                              Opret bruger
+                  Opret bruger
               </v-btn>
             </v-form>
           </v-card-text>

@@ -3,7 +3,7 @@
     <v-card v-for="shift in shifts" :key="shift.id" color="" class="mb-4">
       <v-card-text>
         <div class="title">{{shift.date}}</div>
-        <div>{{shift.note}}</div>
+        <div>{{ shift.note }}</div>
       </v-card-text>
       <v-btn flat small>Se mere</v-btn>
     </v-card>

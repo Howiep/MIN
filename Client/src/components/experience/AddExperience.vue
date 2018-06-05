@@ -10,9 +10,6 @@
               </v-btn>
               <v-toolbar-title>{{ msg }}</v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-toolbar-items>
-                <v-btn dark flat @click.native="dialog = false">Save</v-btn>
-              </v-toolbar-items>
             </v-toolbar>
               <create-stepper v-on:closeMenu="closeDialog"></create-stepper>
             <div style="flex: 1 1 auto;"></div>
@@ -28,7 +25,7 @@ export default {
   name: 'addExperience',
   data () {
     return {
-      msg: 'Ny erfaring',
+      msg: 'Ny vagt',
       dialog: false,
       e6: 1
     }

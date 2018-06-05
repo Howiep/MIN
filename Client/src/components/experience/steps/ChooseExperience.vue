@@ -100,8 +100,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .chooseList{
-    max-height: calc(100vh - 320px);
-
+    max-height: calc(100vh - 340px);
 }
 .list__tile__sub-title, .list__tile__title{
   color: #333333!important;

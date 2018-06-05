@@ -2,17 +2,11 @@
      <v-bottom-nav app fixed :value="true" :active.sync="e1" color="white">
        <div v-for="item in menuItems" :key="item.order">
         <v-btn flat color="primary" :value="item.value" :to="item.path" >
-          <!-- <span>{{ item.text }}</span> -->
+          <span>{{ item.text }}</span>
           <v-icon>{{ item.icon }}</v-icon>
         </v-btn>
        </div>
     </v-bottom-nav>
-    <!-- <v-toolbar-items>
-        <v-btn flat href="/#/">home</v-btn>
-        <v-btn v-if="this.isLoggedIn" flat @click="logout">Log out</v-btn>
-        <v-btn v-if="!this.isLoggedIn" flat href="/#/register">Sign up</v-btn>
-        <v-btn v-if="!this.isLoggedIn" class="primary" href="/#/login">Login</v-btn>
-    </v-toolbar-items> -->
 </template>
 
 <script>

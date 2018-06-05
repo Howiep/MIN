@@ -83,7 +83,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .stepper__content{
-  padding: 5px;
+  /* padding: 5px; */
   height: 100vh;
 }
 .stepper__header{
