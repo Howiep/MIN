@@ -25,7 +25,7 @@ export default {
   },
   async mounted () {
       try {
-        const response = await AuthenticationService.getUser({ headers: { Authorization: 'bearer ' + this.token } })
+        const response = await AuthenticationService.getUser()
         console.log(response.data.result)
         this.userName = response.data.result.userName
       } catch (error) {
