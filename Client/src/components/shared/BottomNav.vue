@@ -1,5 +1,5 @@
 <template>
-     <v-bottom-nav app absolute :value="true" :active.sync="e1" color="white">
+     <v-bottom-nav app fixed :value="true" :active.sync="e1" color="white">
        <div v-for="item in menuItems" :key="item.order">
         <v-btn flat color="primary" :value="item.value" :to="item.path" >
           <!-- <span>{{ item.text }}</span> -->

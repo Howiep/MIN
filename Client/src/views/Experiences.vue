@@ -3,8 +3,7 @@
    <v-layout>
     <v-flex>
       <div class="hello">
-          <h1>{{ msg }}</h1>
-          <h2>Homepage</h2>
+          <shifts></shifts>
           <add-dialog></add-dialog>
       </div>
     </v-flex>
@@ -17,11 +16,11 @@ export default {
   name: 'experiences',
   data () {
     return {
-      msg: 'Experiences'
     }
   },
   components: {
-    'add-dialog': () => import(/* webpackChunkName: "addDialog" */ '@/components/experience/AddExperience')
+    'add-dialog': () => import(/* webpackChunkName: "addDialog" */ '@/components/experience/AddExperience'),
+    'shifts': () => import(/* webpackChunkName: "addDialog" */ '@/components/shifts/Shifts')
   }
 }
 </script>

@@ -5,6 +5,6 @@ axios.defaults.headers.common['Authorization'] = 'bearer ' + store.state.user.to
 
 export default () => {
   return axios.create({
-    baseURL: 'http://localhost:5000/api'
+    baseURL: 'https://cryptic-fjord-69506.herokuapp.com/api'
   })
 }

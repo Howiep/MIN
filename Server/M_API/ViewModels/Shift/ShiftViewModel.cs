@@ -9,7 +9,6 @@ namespace M_API.ViewModels.Shift {
 		public int Id { get; set; }
 		public string Note { get; set; }
 		public DateTime Date { get; set; }
-		public ApplicationUser Student { get; set; }
 		public List<Experience> Experiences { get; set; }
 	}
 }

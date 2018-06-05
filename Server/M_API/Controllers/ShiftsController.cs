@@ -26,13 +26,39 @@ namespace M_API.Controllers {
         }
 
         [HttpGet]
-        public List<Shift> Get()
+        public async Task<List<Shift>> GetAsync()
+        {
+            var user = await GetCurrentUserAsync();
+
+            var shifts = _context.Shifts
+                .Select(e => new Shift
+                {
+                    Id = e.Id,
+                    Note = e.Note,
+                    Date = e.Date,
+                    Student = e.Student,
+                    ShiftExperiences = e.ShiftExperiences.Select(x => new ShiftExperiencesRelation()
+                    {
+                        ExperienceId = x.Experience.Id,
+                        Experience = new Experience
+                        {
+                            Name = x.Experience.Name
+                        }
+                    }).ToList()
+                  }).Where(u => u.Student.Id == user.Id).ToList();
+
+            return shifts;
+        }
+
+        [HttpGet("getall")]
+        public List<Shift> GetAll()
         {
             var shifts = _context.Shifts
                 .Select(e => new Shift
                 {
                     Id = e.Id,
-                    Name = e.Name,
+                    Note = e.Note,
+                    Date = e.Date,
                     ShiftExperiences = e.ShiftExperiences.Select(x => new ShiftExperiencesRelation()
                     {
                         ExperienceId = x.Experience.Id,
@@ -65,6 +91,7 @@ namespace M_API.Controllers {
         //    return data;
         //}
 
+
         // POST: api/Shifts
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] ShiftViewModel model) {
@@ -85,11 +112,7 @@ namespace M_API.Controllers {
             _context.Shifts.Add (shift);
             _context.SaveChanges ();
 
-            // var shiftEntry = new ShiftViewModel {
-
-            // };
-
-            return Ok("yes");
+            return Ok("Success, vagten er blevet tilføjet");
         }
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
