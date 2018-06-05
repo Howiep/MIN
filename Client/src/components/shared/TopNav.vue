@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar absolute app dark class="primary" >
+    <v-toolbar fixed app dark class="primary" >
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
     <v-btn dark to="home">LOGO</v-btn>
     <v-toolbar-title>{{ currentPage }}</v-toolbar-title>

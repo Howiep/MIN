@@ -34,7 +34,8 @@ namespace M_API.Controllers {
                 .Select(e => new Shift
                 {
                     Id = e.Id,
-                    Name = e.Name,
+                    Note = e.Note,
+                    Date = e.Date,
                     Student = e.Student,
                     ShiftExperiences = e.ShiftExperiences.Select(x => new ShiftExperiencesRelation()
                     {
@@ -56,7 +57,8 @@ namespace M_API.Controllers {
                 .Select(e => new Shift
                 {
                     Id = e.Id,
-                    Name = e.Name,
+                    Note = e.Note,
+                    Date = e.Date,
                     ShiftExperiences = e.ShiftExperiences.Select(x => new ShiftExperiencesRelation()
                     {
                         ExperienceId = x.Experience.Id,
@@ -89,9 +91,8 @@ namespace M_API.Controllers {
         //    return data;
         //}
 
+
         // POST: api/Shifts
-
-
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] ShiftViewModel model) {
 
