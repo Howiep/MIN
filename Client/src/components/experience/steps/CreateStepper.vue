@@ -59,7 +59,9 @@ export default {
           date: this.shift.dateFormatted,
           experiences: this.shift.selectedExperiences
         })
-      console.log(response.data)
+      console.log(response)
+      this.$store.dispatch('toggleSnackbar', { message: 'vagt tilføjet', snackColor: 'accent', snackbarStatus: true, timeout: 2500, })
+      this.$router.push({ path: 'user' })
     },
     closeMenu () {
       this.$emit('closeMenu', this.dialog)
