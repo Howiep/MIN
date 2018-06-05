@@ -9,7 +9,7 @@ namespace M_Data.models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual IList<ExperienceGroupRelation> GroupExperiences { get; set; }
+        public virtual List<ExperienceGroupRelation> GroupExperiences { get; set; }
 
     }
 }

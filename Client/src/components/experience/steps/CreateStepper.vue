@@ -11,7 +11,7 @@
 
       <v-stepper-content step="1">
         <choose-date v-on:setDate="setDate"></choose-date>
-        <p v-if="entry.dateFormatted">Du har valgt: {{ entry.dateFormatted }}</p>
+        <p v-if="shift.dateFormatted">Du har valgt: {{ shift.dateFormatted }}</p>
         <v-btn color="primary" block @click.native="e1 = 2">Fortsæt</v-btn>
         <v-btn flat block @click="closeMenu()">Annuller</v-btn>
       </v-stepper-content>
@@ -26,10 +26,10 @@
 
       <v-stepper-content step="3">
         <div class="mb-5">
-          <v-text-field multi-line label="Indsæt note" v-model="entry.createNote">
+          <v-text-field multi-line label="Indsæt note" v-model="shift.createNote">
           </v-text-field>
         </div>
-        <v-btn color="primary" block @click="closeMenu()">indsæt vagt</v-btn>
+        <v-btn color="primary" block @click="CreateShift()">indsæt vagt</v-btn>
         <v-btn flat block @click.native="e1 = e1 - 1">Tilbage</v-btn>
       </v-stepper-content>
 
@@ -38,12 +38,14 @@
 </template>
 
 <script>
+import ShiftsService from '@/services/ShiftsService'
+
 export default {
   name: 'createStepper',
   data () {
     return {
       e1: 1,
-      entry: {
+      shift: {
         createNote: '',
         selectedExperiences: [],
         dateFormatted: null
@@ -51,14 +53,22 @@ export default {
     }
   },
   methods: {
+    CreateShift (shift) {
+      const response = ShiftsService.create({
+          note: this.shift.createNote,
+          date: this.shift.dateFormatted,
+          experiences: this.shift.selectedExperiences
+        })
+      console.log(response.data)
+    },
     closeMenu () {
       this.$emit('closeMenu', this.dialog)
     },
     setExperiences (selected) {
-      this.entry.selectedExperiences = selected
+      this.shift.selectedExperiences = selected
     },
     setDate (date) {
-      this.entry.dateFormatted = date
+      this.shift.dateFormatted = date
     }
   },
   components: {

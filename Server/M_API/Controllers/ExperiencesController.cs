@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using M_API.ViewModels;
 using M_Core.Data;
 using M_Data.models;
+using M_Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,19 +49,26 @@ namespace M_API.Controllers
         }
 
         //// GET: api/Experiences/groups
-        //[HttpGet("groups")]
-        //public IQueryable<ExperienceGroup> GetGroups()
-        //{
-        //    var experienceGroups = _context.ExperienceGroups
-        //        .Select(e => new ExperienceGroup
-        //        {
-        //            Id = e.Id,
-        //            Name = e.Name,
-        //            GroupExperiences = e.GroupExperiences
-        //        });
+        [HttpGet("groups")]
+        public List<ExperienceGroup> GetGroups()
+        {
+            var experienceGroups = _context.ExperienceGroups
+                .Select(e => new ExperienceGroup
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    GroupExperiences = e.GroupExperiences.Select(x => new ExperienceGroupRelation()
+                    {
+                        ExperienceId = x.Experience.Id,
+                        Experience = new Experience
+                        {
+                            Name = x.Experience.Name
+                        }
+                    }).ToList()
+                }).ToList();
 
-        //    return ExperienceGroups;
-        //}
+            return experienceGroups;
+        }
 
         // GET: api/Experiences/categories
         [HttpGet("categories")]

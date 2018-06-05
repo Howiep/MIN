@@ -46,7 +46,7 @@ export default {
   watch: {
     date () {
       this.dateFormatted = this.formatDate(this.date)
-      this.$emit('setDate', this.dateFormatted)
+      this.$emit('setDate', this.date)
     }
   },
   methods: {

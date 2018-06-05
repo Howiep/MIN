@@ -4,7 +4,7 @@
     <v-flex>
       <div class="hello">
           <h1>{{ msg }}</h1>
-          <h2>Homepage</h2>
+          <h2>User: {{ userName }}</h2>
       </div>
     </v-flex>
   </v-layout>
@@ -12,11 +12,29 @@
 </template>
 
 <script>
+import store from '@/store'
+import AuthenticationService from '@/services/AuthenticationService'
+
 export default {
   name: 'home',
   data () {
     return {
-      msg: 'Bruger'
+      msg: 'Bruger',
+      userName: 'howie'
+    }
+  },
+  async mounted () {
+      try {
+        const response = await AuthenticationService.getUser({ headers: { Authorization: 'bearer ' + this.token } })
+        console.log(response.data.result)
+        this.userName = response.data.result.userName
+      } catch (error) {
+        //console.log(error)
+      }
+  },
+  computed: {
+    token () {
+      return store.state.user.token
     }
   }
 }
