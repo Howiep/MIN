@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-card v-for="shift in shifts" :key="shift.id" color="primary darken-1" class="white--text mb-4">
+    <v-card v-for="shift in shifts" :key="shift.id" color="" class="mb-4">
       <v-card-text>
         <div class="title">{{shift.date}}</div>
         <div>{{shift.note}}</div>
       </v-card-text>
-      <v-btn flat dark>Se mere</v-btn>
+      <v-btn flat small>Se mere</v-btn>
     </v-card>
   </div>
 </template>
