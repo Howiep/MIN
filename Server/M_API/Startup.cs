@@ -33,14 +33,6 @@ namespace M_API
         {
             services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("dev")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
-            {
-                //prevents registered users from logging in until their email is confirmed. see https://docs.microsoft.com/en-us/aspnet/core/security/authentication/accconfirm?view=aspnetcore-2.0&tabs=aspnetcore2x#require-email-confirmation
-                config.SignIn.RequireConfirmedEmail = false;
-            })
-               .AddEntityFrameworkStores<DataContext>()
-               .AddDefaultTokenProviders();
-
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings

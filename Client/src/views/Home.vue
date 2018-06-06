@@ -5,7 +5,7 @@
       <div class="hello">
           <h1>{{ msg }}</h1>
           <h2>Homepage</h2>
-          <!-- <babies></babies> -->
+          <babies></babies>
           <add-dialog></add-dialog>
       </div>
     </v-flex>

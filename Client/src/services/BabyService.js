@@ -1,5 +1,4 @@
 import babies from '@/services/data/babies.json'
-import _ from 'lodash'
 
 export default {
   async get () {
